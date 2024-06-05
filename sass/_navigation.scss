@@ -1,0 +1,152 @@
+@use 'setting' as *;
+@use 'mixin' as *;
+/*-----------------------------------------------------------------------------------------
+    ヘッダー
+-----------------------------------------------------------------------------------------*/
+@include header {
+position: fixed;
+top: 0;
+left: 0;
+z-index: 99;
+width: 100%;
+padding: 0 20px;
+line-height: 1;
+/*background-color: rgba($color: #ffffff, $alpha: 0.1);*/
+font-size: 15px;
+@include media-max($BP_TB){
+    font-size: 12px;
+}
+a {
+    text-decoration: none;
+    color: $c_t;
+}
+    .logo {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: 220px;
+        z-index: 101;
+        @include media-max($BP_TB){
+            top: 6px;
+            left: 6px;
+            width: 160px;
+        }
+    }
+    ul.nav {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 60px;
+        li {
+            padding: 0 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 1px rgba($color: #ffffff, $alpha: 0.8), -1px -1px 1px #FFF,
+            -1px 1px 1px rgba($color: #ffffff, $alpha: 0.8), 1px -1px 1px rgba($color: #ffffff, $alpha: 0.8),
+            0px 1px 1px rgba($color: #ffffff, $alpha: 0.8),  0 -1px 1px rgba($color: #ffffff, $alpha: 0.8),
+            -1px 0 0 rgba($color: #ffffff, $alpha: 0.8), 1px 0 0 rgba($color: #ffffff, $alpha: 0.8);
+        }
+        @include media-max($BP_TB){
+            display: block;
+            height: 100%;
+            overflow: auto;
+            padding-left: 40px;
+            li {
+                position: relative;
+                margin-top: 32px;
+                font-size: 20px;
+                font-weight: 600;
+                text-shadow: none;
+                a {
+                    display: inline-block;
+                    padding: 0 3px 4px 0;
+                    border-bottom: solid 3px;
+                }
+            }
+        }
+    }
+    @include media-max($BP_TB){
+        .spWraper {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            padding: 80px 10px 100px;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba($color: #ffffff, $alpha: 0.9);
+            .close {
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding: 16px;
+                @include jost();
+                font-weight: 800;
+                font-size: 32px;
+                line-height: 1;
+                letter-spacing: 1px;
+            }
+        }
+    }
+    .menu {
+        display: none;
+        @include media-max($BP_TB){
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 16px;
+            @include jost();
+            font-weight: 800;
+            font-size: 32px;
+            line-height: 1;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 1px rgba($color: #ffffff, $alpha: 0.8), -1px -1px 1px #FFF,
+            -1px 1px 1px rgba($color: #ffffff, $alpha: 0.8), 1px -1px 1px rgba($color: #ffffff, $alpha: 0.8),
+            0px 1px 1px rgba($color: #ffffff, $alpha: 0.8),  0 -1px 1px rgba($color: #ffffff, $alpha: 0.8),
+            -1px 0 0 rgba($color: #ffffff, $alpha: 0.8), 1px 0 0 rgba($color: #ffffff, $alpha: 0.8);
+        }
+    }
+}
+
+/*-----------------------------------------------------------------------------------------
+    フッター
+-----------------------------------------------------------------------------------------*/
+@include footer {
+border-top: solid 1px #dadada;
+padding: 30px 10px 40px;
+text-align: center;
+    .caution {
+        margin-top: 20px;
+    }
+    .nav {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        @include media-max($BP_TB){
+            margin-top: 12px;
+        }
+        li {
+            padding: 0 20px;
+            border-left: dotted 1px;
+            line-height: 1;
+            @include media-max($BP_TB){
+                margin-top: 12px;
+                border-left: none;
+            }
+            &:first-child {
+                border-left: none;
+            }
+            a {
+                text-decoration: none;
+                color: $c_t;
+            }
+        }
+    }
+    .copy {
+        margin-top: 30px;
+    }
+}

@@ -1,0 +1,772 @@
+@use 'setting' as *;
+@use 'mixin' as *;
+/*-----------------------------------------------------------------------------------------
+    // セクション
+-----------------------------------------------------------------------------------------*/
+
+.mv {
+    position: relative;
+    height: 100vh;
+    /*background-color: #e2b3c6;*/
+    /*@include bgimg('bg_m1.webp',100%,0);
+    background-size: cover;
+    @include bgimg('main_utako.webp',0,0);
+    background-size: contain;*/
+    background-color: #faabb2;
+    @include bgimg('bg_m1.webp',100%,0);
+    background-size: cover;
+    /*background-image: url(../img/main_utako.webp), url(../img/bg_m1.webp);
+    background-repeat: no-repeat, no-repeat;
+    background-position: 0 0, 50% 50%;
+    background-size: contain, cover;*/
+    @include media-max($BP_TB){
+        height: auto;
+    }
+    .inner {
+        margin: auto;
+        max-width: 2000px;
+    }
+    .box {
+        margin-left: auto;
+        max-width: 800px;
+        padding: 100px 60px 0 0;
+        @include media-max(1380px){
+            padding: 80px 10px 0 0;
+            max-width: 700px;
+        }
+        @include media-max(1240px){
+            max-width: 600px;
+        }
+        @include media-max(1140px){
+            max-width: 520px;
+        }
+        @include media-max($BP_TB){
+            max-width: 100%;
+            padding: 60px 0 0;
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 74px;
+                display: block;
+                width: 100%;
+                height: 8px;
+                background-image: linear-gradient(0deg, rgba(251, 207, 213, 0), rgba(251, 207, 213, 1) 75%);
+            }
+        }
+        .utako {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            @include media-max($BP_TB){
+                position: relative;
+                margin-top: 16px;
+                border-bottom: solid 1px;
+            }
+            @include media-max($BP_SP){
+                &::before {
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    right: 10px;
+                    bottom: 56px;
+                    width: 60px;
+                    height: 78px;
+                    @include bgimg('fusen.webp');
+                    background-size: contain;
+                }
+            }
+            &::after {
+                content: "UTAKO\A FOREVER";
+                position: absolute;
+                bottom: 0;
+                right: 10px;
+                font-size: 240px;
+                @include jost();
+                color: #656565;
+                font-weight: 600;
+                white-space: pre;
+                line-height: 1;
+                text-align: right;
+                z-index: 0;
+                mix-blend-mode: difference;
+                text-shadow: 3px 3px 0 #9db;
+                -webkit-text-stroke: 1px #888;
+                /*text-stroke: 1px #888;*/
+                @include media-max(1380px){
+                    font-size: 17vw;
+                }
+                @include media-max($BP_TB){
+                    content: "FOREVER\A UTAKO";
+                    font-size: 12vw;
+                    top: 4px;
+                    opacity: 0.7;
+                    /*
+                    color: transparent;
+                    background-image: linear-gradient(135deg, #fc00ff, #00dbde);
+                    -webkit-background-clip: text;
+                    font-weight: 600;*/
+                }
+            }
+            img {
+                width: auto;
+                height: 100%;
+                object-fit: cover;
+                object-position: 0 100%;
+                @include media-max($BP_TB){
+                    display: block;
+                    width: 120%;
+                    height: auto;
+                    object-fit: contain;
+                }
+            }
+        }
+        .mess {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            @include media-max($BP_TB){
+                margin-top: -14px;
+                padding: 0 12px 0;
+            }
+        }
+        .txt {
+            position: relative;
+            z-index: 2;
+            margin-top: 24px;
+            padding: 0 16px;
+            font-size: 17px;
+            line-height: 2;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 1px rgba($color: #ffffff, $alpha: 0.6), -1px -1px 1px #FFF,
+            -1px 1px 1px rgba($color: #ffffff, $alpha: 0.6), 1px -1px 1px rgba($color: #ffffff, $alpha: 0.6),
+            0px 1px 1px rgba($color: #ffffff, $alpha: 0.6),  0 -1px 1px rgba($color: #ffffff, $alpha: 0.6),
+            -1px 0 0 rgba($color: #ffffff, $alpha: 0.6), 1px 0 0 rgba($color: #ffffff, $alpha: 0.6);
+            @include media-max($BP_TB){
+                margin-top: 0;
+                padding: 12px 12px 20px;
+                font-size: 13px;
+                line-height: 1.8;
+            }
+        }
+    }
+}
+
+.profile {
+    background-size: contain;
+    background-color: #364558;
+    @include bgimg('BG_W030h.webp');
+    background-size: cover;
+    color: $c_w;
+    .ttl::before {
+        background-color: $c_w;
+    }
+    .txtbox {
+        margin: 30px auto 0;
+        max-width: 924px;
+        font-size: 18px;
+        line-height: 2;
+        font-weight:500;
+        text-shadow: 0 0 6px rgb(0, 0, 0, 0.2);
+        p {
+            margin-top: 24px;
+            letter-spacing: 1px;
+            @include media-max($BP_TB){
+                margin-top: 20px;
+                font-size: 13px;
+                line-height: 2.5;
+            }
+        }
+        .cap {
+            text-align: center;
+            font-size: 30px;
+            @include media-max($BP_TB){
+                font-size: 22px;
+                line-height: 1.6;
+            }
+        }
+    }
+}
+
+.history {
+    background-color: #f2f4e1;
+    @include bgimg('desktop_utako.webp',100%,100%);
+    background-size: 500px auto;
+    @include media-max($BP_TB){
+        background-position: 100% 64px;
+        background-size: 160px auto;
+    }
+    @include media-max(424px){
+        background-position: calc(100% + 10px) 76px;
+        background-size: 150px auto;
+    }
+    .list {
+        position: relative;
+        left: 20px;
+        margin: 50px auto 0;
+        max-width: 1200px;
+        @include media-max($BP_TB){
+            left: 12px;
+            width: calc((100% - 12px));
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            left: 3px;
+            display: block;
+            width: 10px;
+            height: 100%;
+            background-color: #364558;
+            background-image: linear-gradient(0deg, rgba(242, 244, 225, 1), rgb(67, 49, 44) 4%, rgb(132, 16, 67) 28%, rgb(54, 18, 132) 76%, rgb(56, 63, 59));
+            border-radius: 50px;
+            @include media-max($BP_TB){
+                left: -12px;
+                width: 6px;
+            }
+        }
+        .year {
+            position: relative;
+            top: -10px;
+            margin-left: 24px;
+            font-size: 60px;
+            @include jost(700);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.2);
+            @include media-max($BP_TB){
+                top: 10px;
+                margin-left: 12px;
+                font-size: 42px;
+                &:first-child {
+                    top: -12px;
+                }
+            }
+        }
+        .event {
+            position: relative;
+            margin-top: 30px;
+            @include media-max($BP_TB){
+                margin-top: 20px;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                left: -5px;
+                top: calc(50% - 12px);
+                display: block;
+                width: 25px;
+                height: 25px;
+                background-color: #00a5ff;
+                border-radius: 50px;
+                @include media-max($BP_TB){
+                    left: -22px;
+                }
+            }
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: calc(50% - 1px);
+                display: block;
+                width: 25%;
+                height: 3px;
+                background-color: #00a5ff;
+                @include media-max($BP_TB){
+                    width: 7%;
+                }
+            }
+            > div {
+                position: relative;
+                width: 65%;
+                margin-left: 25%;
+                border: solid 2px #e8eacf;
+                padding: 20px 24px;
+                background-color: $c_w;
+                box-shadow: 1px 1px 5px rgb(0, 0, 0, 0.1);
+                @include media-max($BP_TB){
+                    width: 90%;
+                    margin-left: 7%;
+                    padding: 16px 14px 12px;
+                }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    display: block;
+                    width: 60%;
+                    height: 3px;
+                    background-color: #00a5ff;
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: -2px;
+                    top: 0;
+                    display: block;
+                    width: 3px;
+                    height: calc(50% + 2px);
+                    background-color: #00a5ff;
+                }
+                > div {
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        right: 0;
+                        bottom: -1px;
+                        display: block;
+                        width: 60%;
+                        height: 3px;
+                        background-color: #00a7b2;
+                    }
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        right: -2px;
+                        bottom: 0;
+                        display: block;
+                        width: 3px;
+                        height: calc(50% + 2px);
+                        background-color: #00a7b2;
+                    }
+                }
+            }
+            .date {
+                @include jost();
+                color: #e1620e;
+                font-size: 18px;
+                font-weight: 700;
+                letter-spacing: 1px;
+                @include media-max($BP_TB){
+                    font-size: 14px;
+                }
+            }
+            .title {
+                margin-top: 4px;
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: 1px;
+                line-height: 1.3;
+                @include media-max($BP_TB){
+                    font-size: 18px;
+                }
+            }
+            .txt {
+                margin-top: 10px;
+                font-size: 15px;
+                line-height: 2;
+                letter-spacing: 1px;
+                @include media-max($BP_TB){
+                    font-size: 13px;
+                }
+            }
+            .link {
+                position: relative;
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+                @include media-max($BP_TB){
+                    font-size: 10px;
+                    overflow: hidden;
+                }
+                a {
+                    display: block;
+                    font-size: 12px;
+                    &.youtube {
+                        flex-shrink: 0;
+                        width: 48px;
+                        margin-right: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.glossary {
+    background-color: #f1cec8;
+    background-image: url(../img/326766_m.png),url(../img/326766_b.png);
+    background-repeat: no-repeat, no-repeat;
+    background-position: 50% 0, 50% 100%;
+    background-size: 100% auto, 100% auto;
+    @include media-max($BP_TB){
+        background-size: auto 180px , auto 46px;
+    }
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1800px;
+        margin: 40px auto 0;
+        @include media-max($BP_TB){
+            display: block;
+        }
+        dl {
+            position: relative;
+            flex-basis: calc(33.3333333% - 40px);
+            margin: 40px 20px 0;
+            border: solid 2px #364558;
+            background-color: $c_w;
+            padding: 12px 12px 16px;
+            box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
+            @include media-max(1360px){
+                flex-basis: calc(50% - 40px);
+            }
+            @include media-max($BP_TB){
+                left: -2px;
+                margin: 30px 8px 0;
+                padding: 8px 6px 12px 10px;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                left: 12px;
+                top: -18px;
+                display: block;
+                width: 96px;
+                height: 96px;
+                background-color: #cddece;
+                @include bgimg('ic_utako01.png');
+                background-size: cover;
+                overflow: hidden;
+                border-radius: 100px;
+                border: solid 2px #364558;
+                @include media-max($BP_TB){
+                    top: -12px;
+                    left: 10px;
+                    width: 78px;
+                    height: 78px;
+                }
+            }
+            dt {
+                position: relative;
+                margin-left: auto;
+                width: calc(100% - 120px);
+                background-color: #364558;
+                padding: 10px;
+                color: $c_w;
+                font-weight: 600;
+                font-size: 18px;
+                letter-spacing: 3px;
+                text-align: center;
+                border-radius: 2px;
+                @include media-max($BP_TB){
+                    width: calc(100% - 100px);
+                    font-size: 15px;
+                    padding-left: 18px;
+                    padding-right: 6px;
+                    text-align: left;
+                    letter-spacing: 2px;
+                }
+                &::before {
+                    content:"";
+                    position: absolute;
+                    top: 12px;
+                    left: -24px;
+                    border-top: 10px solid rgba(0, 0, 0, 0);
+                    border-right: 16px solid #364558;
+                    border-left: 9px solid rgba(0, 0, 0, 0);
+                    border-bottom: 10px solid rgba(0, 0, 0, 0);
+                }
+            }
+            dd {
+                margin-top: 20px;
+                padding: 4px;
+                line-height: 2;
+                font-size: 16px;
+                @include media-max($BP_TB){
+                    padding: 0 4px;
+                    line-height: 1.9;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+
+
+}
+
+.switch {
+    background-color: #ecf7f5;
+    .list {
+        position: relative;
+        margin: 30px auto 0;
+        max-width: 1800px;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        @include media-max($BP_TB){
+            display: block;
+            max-width: 400px;
+            margin: auto;
+        }
+        figure {
+            position: relative;
+            margin: 40px 12px 0;
+            display: block;
+            flex-basis: calc(20% - 24px);
+            figcaption {
+                position: relative;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 4px 20px;
+                background-color: #d02578;
+                border-radius: 10px;
+                min-height: 66px;
+                color: $c_w;
+                font-size: 16px;
+                line-height: 1.4;
+                letter-spacing: 2px;
+                font-weight: 500;
+                text-align: center;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 100%;
+                    left: 30px;
+                    width: 0;
+                    height: 0;
+                    border: 12px solid transparent;
+                    border-top: 16px solid #d02578;
+                }
+            }
+        }
+    }
+}
+
+.activities {
+    background-color: #c5c5b5;
+    .list {
+        margin: 30px auto 0;
+        max-width: 1800px;
+        display: flex;
+        flex-wrap: wrap;
+        @include media-max($BP_TB){
+            display: block;
+            margin-top: 60px;
+            max-width: 500px;
+        }
+        li {
+            flex-basis: calc(25% - 24px);
+            margin: 30px 12px;
+            @include media-max($BP_TB){
+                margin-top: 60px;
+            }
+            .img {
+                border-radius: 16px;
+                border: solid 3px;
+                overflow: hidden;
+            }
+            dt {
+                margin-top: 10px;
+                font-size: 22px;
+                font-weight: bold;
+                text-align: center;
+            }
+            dd {
+                margin-top: 10px;
+                padding: 4px;
+                font-size: 15px;
+                line-height: 2;
+            }
+        }
+    }
+
+
+
+}
+
+.fanart {
+    background-color: #373d37;
+    color: $c_w;
+    .ttl::before {
+        background-color: $c_w;
+    }
+    .txt {
+        margin-top: 42px;
+        font-size: 18px;
+        text-align: center;
+        @include media-max($BP_TB){
+            font-size: 15px;
+        }
+    }
+    .container {
+        margin: 40px auto 0;
+        max-width: 1800px;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 300px 300px 300px 300px 300px auto;
+        @include media-max(1600){
+            grid-template-rows: 280px 280px 280px 280px 280px auto;
+        }
+        @include media-max(1440){
+            grid-template-rows: 200px 200px 200px 200px 200px auto;
+        }
+        @include media-max($BP_TB){
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 100px 100px 100px 100px 100px auto;
+        }
+        .item {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                cursor: pointer;
+            }
+            &:nth-child(1){
+                grid-row: 1 / span 2;
+            }
+            &:nth-child(2){
+                grid-column: 2 / span 2;
+            }
+            &:nth-child(3){
+                grid-column: 4 / span 2;
+                @include media-max($BP_TB){
+                    grid-column: 2 / span 2;
+                }
+            }
+            &:nth-child(4){
+                grid-column: 6 / span 1;
+                grid-row: 1 / span 2;
+                @include media-max($BP_TB){
+                    grid-column: 1 / span 1;
+                    grid-row: 3 / span 2;
+                }
+            }
+            &:nth-child(6){
+                grid-column: 3 / span 2;
+                @include media-max($BP_TB){
+                    grid-column: 2 / span 2;
+                    grid-row: 3 / span 2;
+                }
+            }
+        }
+    }
+
+}
+
+.message {
+    background-color: rgb(220, 228, 218);
+    background-image: url(../img/CorkBoard02.jpg);
+    .ttl {
+        &::before {
+            border: solid 1px $c_w;
+        }
+        h2,.sub {
+            text-shadow: 1px 1px 1px rgba($color: #ffffff, $alpha: 0.8), -1px -1px 1px #FFF,
+            -1px 1px 1px rgba($color: #ffffff, $alpha: 0.8), 1px -1px 1px rgba($color: #ffffff, $alpha: 0.8),
+            0px 1px 1px rgba($color: #ffffff, $alpha: 0.8),  0 -1px 1px rgba($color: #ffffff, $alpha: 0.8),
+            -1px 0 0 rgba($color: #ffffff, $alpha: 0.8), 1px 0 0 rgba($color: #ffffff, $alpha: 0.8);
+        }
+    }
+    .box {
+        margin: 30px auto 0;
+        max-width: 1800px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        @include media-max($BP_TB){
+            display: block;
+        }
+        li {
+            position: relative;
+            margin: 60px 20px 0;
+            flex-basis: calc(25% - 40px);
+            box-shadow: 0 2px 3px rgba(0,0,0,.22);
+            padding: 20px 16px 0px;
+            background-color: #fffcf6;
+            @include media-max(1380px){
+                margin: 50px 16px 0;
+                flex-basis: calc(33.333333333% - 32px);
+            }
+            @include media-max($BP_TB){
+                margin: 50px 10px 0;
+            }
+            &:after {
+                position: absolute;
+                content: "";
+                top: 20px;
+                width: 30%;
+                height: 35px;
+                opacity: 0.5;
+                margin: -35px auto 10px 35%;
+                background: #db7093;
+                transform: rotate(-2deg);
+                left: 0;
+            }
+            &:nth-child(2n) {
+                top: 15px;
+                transform: rotate(1deg);
+            }
+            &:nth-child(3n) {
+                top: -5px;
+                transform: rotate(-2deg);
+                @include media-max($BP_TB){
+                    transform: rotate(-1deg);
+                }
+            }
+            &:nth-child(4n) {
+                top: 5px;
+                transform: rotate(1deg);
+            }
+            &:nth-child(5n) {
+                top: 0;
+                transform: rotate(0);
+            }
+            .title {
+                color: #521616;
+                font-size: 18px;
+                font-weight:bold;
+                @include media-max($BP_TB){
+                    font-size: 16px;
+                }
+            }
+            p {
+                margin-top: 12px;
+                padding-bottom: 24px;
+                background-image:
+                linear-gradient(90deg, rgba(75, 29, 33, 0) 0%, rgba(237, 119, 128, 0) 50%, #fffcf6 0%, #fffcf6 100%), linear-gradient(180deg, rgba(237, 119, 128, 0) 0%, rgba(237, 119, 128, 0) 95%, #ed7780 100%);
+                background-size: 8px 100%,100% 2em;
+                font-size: 14px;
+                line-height: 1.99;
+                letter-spacing: 1px;
+                font-weight: bold;
+                @include media-max($BP_TB){
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+
+
+.specialthanks {
+    .list {
+        margin: 60px auto 0;
+        max-width: 1800px;
+        padding: 10px;
+        font-size: 16px;
+        line-height: 2.5;
+        letter-spacing: 1px;
+        text-align: center;
+        word-break: normal;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
