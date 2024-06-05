@@ -24,9 +24,11 @@ $(window).on('load',function() {
     $('.close').on("click", function() {
         $('#spWraper').slideUp();
     });
-    $('#spWraper a').on("click", function() {
-        $('#spWraper').hide();
-    });
+    if ($(window).width() <= 768) {
+        $('#header a').on("click", function() {
+            $('#spWraper').hide();
+        });
+    }
 
     $('.openModal').on("click", function() {
         $('#modalArea').fadeIn(150);
