@@ -652,13 +652,13 @@ $( function() {
 $('#lord').show();
 var result = prompt("パスワードを入力してください");
 if(result == 'utako-forever'){
-	$('#lord').fadeOut(150);
+	$('#header').show();
+	$('#TOP').addClass('is-on');
+	$('#lord').fadeOut();
 }else {
 	$('#TOP').remove();
 }
 </script>
-
-
 
 </div>
 </body>
