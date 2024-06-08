@@ -47,10 +47,10 @@
                 content: "";
                 position: absolute;
                 left: 0;
-                top: 74px;
+                top: 70px;
                 display: block;
                 width: 100%;
-                height: 8px;
+                height: 16px;
                 background-image: linear-gradient(0deg, rgba(251, 207, 213, 0), rgba(251, 207, 213, 1) 75%);
             }
         }
@@ -66,17 +66,23 @@
                 margin-top: 16px;
                 border-bottom: solid 1px;
             }
-            @include media-max($BP_SP){
+            @include media-max($BP_TB){
                 &::before {
                     content: "";
                     position: absolute;
                     display: block;
                     right: 10px;
-                    bottom: 56px;
-                    width: 60px;
-                    height: 78px;
+                    bottom: 100px;
+                    width: 80px;
+                    height: 98px;
                     @include bgimg('fusen.webp');
                     background-size: contain;
+                    @include media-max($BP_SP){
+                        right: 10px;
+                        bottom: 56px;
+                        width: 60px;
+                        height: 78px;
+                    }
                 }
             }
             &::after {
@@ -103,12 +109,9 @@
                     content: "FOREVER\A UTAKO";
                     font-size: 12vw;
                     top: 4px;
-                    opacity: 0.7;
-                    /*
-                    color: transparent;
-                    background-image: linear-gradient(135deg, #fc00ff, #00dbde);
-                    -webkit-background-clip: text;
-                    font-weight: 600;*/
+                    opacity: 0.4;
+                    text-shadow: 3px 3px 0 #6c6c6c;
+                    -webkit-text-stroke: 1px #d9d9d9;
                 }
             }
             img {
@@ -156,11 +159,30 @@
     }
 }
 
+.profileWrap {
+    position: relative;
+    z-index: 1;
+    .profileBG {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        div {
+            width: 100%;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            z-index: -1;
+            background-color: #364558;
+            @include bgimg('BG_W030h.webp');
+            background-size: cover;
+        }
+    }
+}
+
 .profile {
-    background-size: contain;
-    background-color: #364558;
-    @include bgimg('BG_W030h.webp');
-    background-size: cover;
     color: $c_w;
     .ttl::before {
         background-color: $c_w;
@@ -172,6 +194,9 @@
         line-height: 2;
         font-weight:500;
         text-shadow: 0 0 6px rgb(0, 0, 0, 0.2);
+        @include media-max($BP_TB){
+            padding: 0 8px;
+        }
         p {
             margin-top: 24px;
             letter-spacing: 1px;
@@ -193,15 +218,17 @@
 }
 
 .history {
+    overflow: hidden;
     background-color: #f2f4e1;
     @include bgimg('desktop_utako.webp',100%,100%);
     background-size: 500px auto;
     @include media-max($BP_TB){
-        background-position: 100% 64px;
+        padding-bottom: 200px;
+        background-position: 99% 100%;
         background-size: 160px auto;
     }
     @include media-max(424px){
-        background-position: calc(100% + 10px) 76px;
+        padding-bottom: 190px;
         background-size: 150px auto;
     }
     .list {
@@ -262,7 +289,7 @@
                 background-color: #00a5ff;
                 border-radius: 50px;
                 @include media-max($BP_TB){
-                    left: -22px;
+                    left: -21px;
                 }
             }
             &::after {
@@ -368,32 +395,180 @@
                 margin-top: 10px;
                 display: flex;
                 align-items: center;
-                @include media-max($BP_TB){
-                    font-size: 10px;
-                    overflow: hidden;
-                }
                 a {
                     display: block;
-                    font-size: 12px;
+                    font-size: 13px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    @include media-max($BP_TB){
+                        font-size: 12px;
+                    }
                     &.youtube {
                         flex-shrink: 0;
-                        width: 48px;
-                        margin-right: 12px;
+                        width: 32px;
+                        margin-right: 8px;
+                    }
+                    &.twx {
+                        flex-shrink: 0;
+                        width: 25px;
+                        margin-right: 8px;
+                    }
+                    &.window {
+                        flex-shrink: 0;
+                        width: 32px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+            &.is-on {
+                animation-name: event;
+                animation-duration: 0.6s;
+                animation-fill-mode: forwards;
+                animation-timing-function: ease-out;
+                opacity: 0;
+                will-change: transform;
+                &::after {
+                    animation-name: event-width;
+                    animation-delay: 0.3s;
+                    animation-duration: 0.8s;
+                    animation-fill-mode: forwards;
+                    animation-timing-function: ease-out;
+                    opacity: 0;
+                    width: 1%;
+                    @include media-max($BP_TB){
+                        animation-name: event-width-sp;
+                        animation-duration: 0.2s;
+                    }
+                }
+                > div {
+                    &::before {
+                        animation-name: stroke-width;
+                        animation-delay: 0.3s;
+                        animation-duration: 1s;
+                        animation-fill-mode: forwards;
+                        animation-timing-function: ease-out;
+                        opacity: 0;
+                        width: 1%;
+                    }
+                    &::after {
+                        animation-name: stroke-height;
+                        animation-delay: 0.3s;
+                        animation-duration: 0.8s;
+                        animation-fill-mode: forwards;
+                        animation-timing-function: ease-out;
+                        opacity: 0;
+                        height: 1%;
+                    }
+                    > div {
+                        &::before {
+                            animation-name: stroke-width;
+                            animation-delay: 0.3s;
+                            animation-duration: 1s;
+                            animation-fill-mode: forwards;
+                            animation-timing-function: ease-out;
+                            opacity: 0;
+                            width: 1%;
+                        }
+                        &::after {
+                            animation-name: stroke-height;
+                            animation-delay: 0.3s;
+                            animation-duration: 0.8s;
+                            animation-fill-mode: forwards;
+                            animation-timing-function: ease-out;
+                            opacity: 0;
+                            height: 1%;
+                        }
                     }
                 }
             }
         }
     }
 }
+@keyframes event {
+    0% {
+        opacity: 0;
+        transform: translateX(120px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes event-width {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 25%;
+        opacity: 1;
+    }
+}
+@keyframes event-width-sp {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 7%;
+        opacity: 1;
+    }
+}
+@keyframes stroke-width {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 60%;
+        opacity: 1;
+    }
+}
+@keyframes stroke-height {
+    0% {
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        height: calc(50% + 2px);
+        opacity: 1;
+    }
+}
+
+
+.glossaryWrap {
+    position: relative;
+    z-index: 1;
+    .glossaryBG {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        div {
+            width: 100%;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            z-index: -1;
+            background-color: #f1cec8;
+            @include bgimg('326766_m.png',50%,0);
+            background-size: 100% auto;
+            @include media-max($BP_TB){
+                background-size: auto 180px;
+            }
+        }
+    }
+}
 
 .glossary {
-    background-color: #f1cec8;
-    background-image: url(../img/326766_m.png),url(../img/326766_b.png);
-    background-repeat: no-repeat, no-repeat;
-    background-position: 50% 0, 50% 100%;
-    background-size: 100% auto, 100% auto;
+    @include bgimg('326766_b.png',50%,100%);
+    background-size: 100% auto;
     @include media-max($BP_TB){
-        background-size: auto 180px , auto 46px;
+        padding-bottom: 60px;
+        background-size: auto 50px;
     }
     .list {
         display: flex;
@@ -418,6 +593,13 @@
                 left: -2px;
                 margin: 30px 8px 0;
                 padding: 8px 6px 12px 10px;
+            }
+            &.is-on {
+                animation-name: glossaryAnime;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                opacity: 0;
+                will-change: transform;
             }
             &::before {
                 content: "";
@@ -484,36 +666,96 @@
             }
         }
     }
+}
+@keyframes glossaryAnime {
+	from {
+		transform: rotateX(100deg) scale(0.6);
+		opacity: 0;
+	}
+	to {
+		transform: rotateX(0) scale(1);
+		opacity: 1;
+	}
+}
 
 
+.switchWrap {
+    position: relative;
+    z-index: 1;
+    .switchBG {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        div {
+            width: 100%;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            z-index: -1;
+            @include bgimg('kirakirashiro19.png');
+            background-size: cover;
+            @include media-max($BP_TB){
+                background-image: url(../img/kirakirashiro19_sp.png);
+            }
+        }
+    }
 }
 
 .switch {
-    background-color: #ecf7f5;
+    .inner {
+        height: 580px;
+        padding: 50px 0 0;
+        background-image: url('../img/81844510_p2.webp');
+        background-repeat: no-repeat;
+        background-position: 50% 100%;
+        background-size: auto 420px;
+        @include media-max($BP_TB){
+            height: 360px;
+            background-size: auto 210px;
+        }
+    }
     .list {
         position: relative;
-        margin: 30px auto 0;
+        margin: 0 auto;
         max-width: 1800px;
         display: flex;
         flex-wrap: wrap;
         text-align: center;
+        @include bgimg('81844510_p3.webp',99%,100%);
+        background-size: auto 250px;
+        padding: 0 0 260px;
         @include media-max($BP_TB){
             display: block;
             max-width: 400px;
             margin: auto;
+            background-position: 50% 100%;
         }
         figure {
             position: relative;
             margin: 40px 12px 0;
             display: block;
             flex-basis: calc(20% - 24px);
+            @include media-max(1680px){
+                flex-basis: calc(25% - 20px);
+                margin: 40px 10px 0;
+            }
+            @include media-max(1340px){
+                flex-basis: calc(33.333333333% - 16px);
+                margin: 40px 8px 0;
+            }
+            @include media-max(1110px){
+                flex-basis: calc(50% - 16px);
+            }
             figcaption {
                 position: relative;
                 margin-bottom: 20px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 4px 20px;
+                padding: 4px 16px;
                 background-color: #d02578;
                 border-radius: 10px;
                 min-height: 66px;
@@ -523,6 +765,10 @@
                 letter-spacing: 2px;
                 font-weight: 500;
                 text-align: center;
+                @include media-max($BP_TB){
+                    padding: 14px 8px;
+                    min-height: auto;
+                }
                 &::after {
                     content: '';
                     position: absolute;
@@ -573,6 +819,9 @@
                 font-size: 15px;
                 line-height: 2;
             }
+            .button01 {
+                margin-top: 16px;
+            }
         }
     }
 
@@ -581,7 +830,10 @@
 }
 
 .fanart {
-    background-color: #373d37;
+    background-color: #2b2c35;
+    @include bgimg('fan_bg.webp',50%,100%);
+    background-size: cover;
+    padding-bottom: 150px;
     color: $c_w;
     .ttl::before {
         background-color: $c_w;
@@ -651,7 +903,7 @@
 }
 
 .message {
-    background-color: rgb(220, 228, 218);
+    background-color: #dea980;
     background-image: url(../img/CorkBoard02.jpg);
     .ttl {
         &::before {
@@ -686,6 +938,13 @@
             }
             @include media-max($BP_TB){
                 margin: 50px 10px 0;
+            }
+            &.is-on {
+                animation-name: messageAnime;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                opacity: 0;
+                will-change: transform;
             }
             &:after {
                 position: absolute;
@@ -728,12 +987,12 @@
             }
             p {
                 margin-top: 12px;
-                padding-bottom: 24px;
+                padding-bottom: 20px;
                 background-image:
                 linear-gradient(90deg, rgba(75, 29, 33, 0) 0%, rgba(237, 119, 128, 0) 50%, #fffcf6 0%, #fffcf6 100%), linear-gradient(180deg, rgba(237, 119, 128, 0) 0%, rgba(237, 119, 128, 0) 95%, #ed7780 100%);
-                background-size: 8px 100%,100% 2em;
+                background-size: 8px 100%, 100% 2em;
+                line-height: 2;
                 font-size: 14px;
-                line-height: 1.99;
                 letter-spacing: 1px;
                 font-weight: bold;
                 @include media-max($BP_TB){
@@ -743,10 +1002,22 @@
         }
     }
 }
-
+@keyframes messageAnime {
+    0% {
+        transform: translateY(-30px);
+        filter: blur(10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
 
 
 .specialthanks {
+    background-color: #fffafa;
     .list {
         margin: 60px auto 0;
         max-width: 1800px;

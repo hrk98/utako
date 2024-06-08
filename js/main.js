@@ -1,4 +1,6 @@
 $(window).on('load',function() {
+    //$("#splash").delay(1500).fadeOut('slow');
+    //$("#splash_logo").delay(1200).fadeOut('slow');
 
 	$('a[href^="#"]').on("click", function() {
 		// スクロールの速度
@@ -20,13 +22,20 @@ $(window).on('load',function() {
 
     $('.menu').on("click", function() {
         $('#spWraper').slideDown();
+        $('#spWraper .nav').addClass("is-on");
+        $('#spWraper .close').addClass("is-on");
     });
     $('.close').on("click", function() {
-        $('#spWraper').slideUp();
+        $('#spWraper').slideUp(function(){
+            $('#spWraper .nav').removeClass("is-on");
+            $('#spWraper .close').removeClass("is-on");
+        });
     });
     if ($(window).width() <= 768) {
         $('#header a').on("click", function() {
             $('#spWraper').hide();
+            $('#spWraper .nav').removeClass("is-on");
+            $('#spWraper .close').removeClass("is-on");
         });
     }
 
@@ -53,6 +62,42 @@ $(window).on('load',function() {
 
 
 
+// 画面をスクロールをしたら動かしたい場合の記述
+$(window).scroll(function (){
+    fadeAnime();/* アニメーション用の関数を呼ぶ*/
+});// ここまで画面をスクロールをしたら動かしたい場合の記述
+
+function fadeAnime(){
+
+$('#history .event').each(function(){
+    var elemPos = $(this).offset().top - 20;//要素より上
+    var scroll = $(window).scrollTop();
+    var windowHeight = $(window).height();
+    if (scroll >= elemPos - windowHeight){
+        $(this).addClass('is-on');
+    }
+});
+
+$('#glossary .list dl').each(function(){
+    var elemPos = $(this).offset().top - 20;//要素より上
+    var scroll = $(window).scrollTop();
+    var windowHeight = $(window).height();
+    if (scroll >= elemPos - windowHeight){
+        $(this).addClass('is-on');
+    }
+});
+
+$('#message .box li').each(function(){
+    var elemPos = $(this).offset().top - 20;//要素より上
+    var scroll = $(window).scrollTop();
+    var windowHeight = $(window).height();
+    if (scroll >= elemPos - windowHeight){
+        $(this).addClass('is-on');
+    }
+});
+
+
+}//
 
 
 

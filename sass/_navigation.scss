@@ -4,6 +4,7 @@
     ヘッダー
 -----------------------------------------------------------------------------------------*/
 @include header {
+display: none;
 position: fixed;
 top: 0;
 left: 0;
@@ -24,12 +25,18 @@ a {
         position: absolute;
         left: 10px;
         top: 10px;
-        width: 220px;
+        width: 240px;
         z-index: 101;
+        @include media-max(1500px){
+            width: 220px;
+        }
+        @include media-max(1300px){
+            width: 210px;
+        }
         @include media-max($BP_TB){
             top: 6px;
             left: 6px;
-            width: 160px;
+            width: 150px;
         }
     }
     ul.nav {
@@ -54,14 +61,27 @@ a {
             li {
                 position: relative;
                 margin-top: 32px;
-                font-size: 20px;
+                font-size: 18px;
                 font-weight: 600;
                 text-shadow: none;
                 a {
+                    overflow: hidden;
                     display: inline-block;
-                    padding: 0 3px 4px 0;
-                    border-bottom: solid 3px;
+                    padding: 0 3px 5px 0;
+                    border-bottom: solid 2px;
+                    span {
+                        display: inline-block;
+                        transform: translateY(60px);
+                    }
                 }
+            }
+            &.is-on li a span {
+                animation-name: sphead;
+                animation-duration: 0.7s;
+                animation-delay: 0.3s;
+                animation-fill-mode: forwards;
+                animation-timing-function: ease-out;
+                will-change: transform;
             }
         }
     }
@@ -75,19 +95,7 @@ a {
             padding: 80px 10px 100px;
             width: 100%;
             height: 100vh;
-            background-color: rgba($color: #ffffff, $alpha: 0.9);
-            .close {
-                display: block;
-                position: absolute;
-                right: 0;
-                top: 0;
-                padding: 16px;
-                @include jost();
-                font-weight: 800;
-                font-size: 32px;
-                line-height: 1;
-                letter-spacing: 1px;
-            }
+            background-color: rgba($color: #ffffff, $alpha: 0.95);
         }
     }
     .menu {
@@ -109,13 +117,61 @@ a {
             -1px 0 0 rgba($color: #ffffff, $alpha: 0.8), 1px 0 0 rgba($color: #ffffff, $alpha: 0.8);
         }
     }
+    .close {
+        display: none;
+        @include media-max($BP_TB){
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 16px;
+            @include jost();
+            font-weight: 800;
+            font-size: 32px;
+            line-height: 1;
+            letter-spacing: 1px;
+            overflow: hidden;
+            span {
+                display: inline-block;
+                opacity: 0;
+            }
+            &.is-on span {
+                animation-name: closeAnime;
+                animation-duration: 0.65s;
+                animation-fill-mode: forwards;
+                animation-delay: 0.25s;
+                animation-timing-function: ease-out;
+                will-change: transform;
+            }
+        }
+    }
 }
+
+@keyframes sphead {
+	from {
+		transform: translateY(60px);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+@keyframes closeAnime {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
 
 /*-----------------------------------------------------------------------------------------
     フッター
 -----------------------------------------------------------------------------------------*/
 @include footer {
 border-top: solid 1px #dadada;
+background-color: #ffffff;
+box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.05);
 padding: 30px 10px 40px;
 text-align: center;
     .caution {
@@ -135,7 +191,12 @@ text-align: center;
             line-height: 1;
             @include media-max($BP_TB){
                 margin-top: 12px;
-                border-left: none;
+                flex-basis: 33.3333333%;
+                padding: 0;
+                font-size: 13px;
+                &:nth-child(4) {
+                    border-left: none;
+                }
             }
             &:first-child {
                 border-left: none;
