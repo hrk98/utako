@@ -202,11 +202,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCurrentSortDisplay() {
         const sortOrder = isAscending ? '昇順' : '降順';
         const sortCriteriaText = {
-            startAt: '日付順',
-            viewCount: '視聴回数順',
-            duration: '継続時間順',
-            likeCount: 'いいね数順',
-            commentCount: 'コメント数順'
+            startAt: '日付',
+            viewCount: '視聴回数',
+            duration: '動画の時間',
+            likeCount: 'いいね数',
+            commentCount: 'コメント数'
         }[currentSortCriteria];
         currentSortElement.textContent = `現在の順番: ${sortCriteriaText} (${sortOrder})`;
     }
