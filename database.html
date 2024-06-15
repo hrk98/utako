@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONファイルの読み込みと表示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding-top: 100vh;
+            font-size: 13px;
+        }
+        p {
+            margin: 4px 0 0;
+            padding: 0;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        #controls label,
+        #controls button,
+        #controls select,
+        #controls input {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        #json-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #json-content li {
+            display: flex;
+            background: #f4f4f4;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        #json-content h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.5em;
+        }
+        #json-content li .img {
+            flex-basis: 240px;
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+        #json-content li .txt {
+            padding: 16px 32px;
+        }
+        #json-content li .status1 {
+            display: flex;
+        }
+        #json-content li .status1 p {
+            margin-right: 32px;
+        }
+        #json-content li .status2 {
+            display: flex;
+        }
+        #json-content li .status2 p {
+            margin-right: 32px;
+        }
+        #json-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .accordion {
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 10px 12px;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            background-color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .active, .accordion:hover {
+            background-color: #ccc;
+        }
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: white;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        .pagination {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .pagination button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .pagination button.active {
+            background-color: #ccc;
+        }
+        .pagination button.disabled {
+            background-color: #eee;
+            cursor: not-allowed;
+        }
+        /* テキスト入力フィールドのスタイル */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            display: inline-block;
+            width: 100%;
+            max-width: 250px;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* ボタンのスタイル */
+        button,
+        input[type="submit"] {
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* ラジオボタン・チェックボックスのスタイル */
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin: 10px;
+            transform: scale(1.5);
+        }
+
+        /* セレクトボックスのスタイル */
+        select {
+            display: inline-block;
+            padding: 11px 16px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* ラベルのスタイル */
+        label {
+            margin: 10px 0;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .topWrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bottomWrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px 4px 50px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            #json-content h2 {
+                margin: 0 0 4px 0;
+                font-size: 14px;
+            }
+            #json-content li .img {
+                flex-basis: 40px;
+            }
+            #json-content li .txt {
+                padding: 12px;
+            }
+            #json-content li .status1 p {
+                margin-right: 4px;
+            }
+            #json-content li .status2 {
+                display: flex;
+            }
+            #json-content li .status2 p {
+                margin-right: 4px;
+            }
+            .bottomWrap {
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>鈴鹿詩子 全配信検索データベース</h1>
+    <div id="controls">
+        <div>
+            <p>表示する動画の種類</p>
+            <label><input type="checkbox" data-file="processed-all-streams.json" checked>生配信</label>
+            <label><input type="checkbox" data-file="processed-all-videos.json" checked>動画</label>
+            <label><input type="checkbox" data-file="processed-all-shorts.json" checked>ショート動画</label>
+            <label><input type="checkbox" data-file="processed-from-membership.json" checked>元メン限</label>
+        </div>
+        <div id="sort">
+            <p>以下の順番で並び替え</p>
+            <button data-sort="startAt" class="active">日付順</button>
+            <button data-sort="viewCount">視聴回数順</button>
+            <button data-sort="duration">継続時間順</button>
+            <button data-sort="likeCount">いいね数順</button>
+            <button data-sort="commentCount">コメント数順</button>
+            <select id="order-select">
+                <option value="asc">昇順</option>
+                <option value="desc">降順</option>
+            </select>
+        </div>
+        <div>
+            <p>タイトルキーワード検索</p>
+            <div>
+                <input type="text" id="search-input" placeholder="タイトル検索">
+                <button id="search-button" class="active">検索</button>
+            </div>
+            <div>
+                <label><input type="radio" name="search-type" value="and" checked> AND検索</label>
+                <label><input type="radio" name="search-type" value="or"> OR検索</label>
+            </div>
+        </div>
+    </div>
+
+    <p id="current-sort">現在のソート: 日付順 (昇順)</p>
+    <div class="topWrap">
+        <p id="total-count-top"></p> <!-- 件数表示用の要素を追加（上部） -->
+        <p id="page-info-top"></p> <!-- ページ情報表示用の要素を追加（上部） -->
+        <p>ページ移動 <select id="page-select"></select></p>
+    </div>
+
+    <div id="json-content"></div>
+
+    <div class="bottomWrap">
+        <p id="page-info-bottom"></p> <!-- ページ情報表示用の要素を追加（下部） -->
+        <p id="total-count-bottom"></p> <!-- 件数表示用の要素を追加（下部） -->
+    </div>
+    <div class="pagination" id="pagination"></div> <!-- ページャー用の要素を追加 -->
+
+    <script src="js/script.js"></script>
+	<script
+	src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+	integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+	crossorigin="anonymous"></script>
+<script>
+var result = prompt("パスワードを入力してください");
+if(result == '801'){
+	$('body').css('padding','20px');
+}else {
+	$('body').remove();
+}
+</script>
+</body>
+</html>

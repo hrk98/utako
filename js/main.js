@@ -1,16 +1,20 @@
 $(window).on('load',function() {
-    //$("#splash").delay(1500).fadeOut('slow');
-    //$("#splash_logo").delay(1200).fadeOut('slow');
+    $("#TOP").addClass("is-on");
+    $("#splash").delay(1500).fadeOut('slow', function() {
+        $("#mv").addClass("is-on");
+    });
+    $("#splash_logo").delay(1200).fadeOut('slow');
 
 	$('a[href^="#"]').on("click", function() {
-		// スクロールの速度
+
 		var speed = 400;// ミリ秒
-		// アンカーの値取得
 		var href= $(this).attr("href");
-		// 移動先を取得
 		var target = $(href == "#" || href == "" ? 'html' : href);
-		// 移動先を数値で取得
 		var position = target.offset().top;
+
+        if(href != "#TOP" && position == 0){
+            return false;
+        }
 		// スクロール調整
 		if($('body,html').scrollTop() > 800 && position == 0){
 			$('body,html').scrollTop(position-800);
@@ -39,33 +43,38 @@ $(window).on('load',function() {
         });
     }
 
-    $('.openModal').on("click", function() {
-        $('#modalArea').fadeIn(150);
-        $('#js-art').attr("src",$(this).find("img").attr("src"));
-    });
-    $('#closeModal , #modalBg').on("click", function() {
-        $('#modalArea').fadeOut(150);
-    });
+    const glossary = $('#glossary');
+    const utakoswitch = $('#switch');
 
-
-
-    $(".gallery").modaal({
-        type: 'image',
-        overlay_close:true,//モーダル背景クリック時に閉じるか
-        before_open:function(){// モーダルが開く前に行う動作
-            $('html').css('overflow-y','hidden');/*縦スクロールバーを出さない*/
-        },
-        after_close:function(){// モーダルが閉じた後に行う動作
-            $('html').css('overflow-y','scroll');/*縦スクロールバーを出す*/
-        }
-    });
-
-
+    var windowHeight = $(window).height();
+    //console.log(windowHeight)
+    var pos1 = Math.ceil(glossary.offset().top);
+    var pos2 = Math.ceil(utakoswitch.offset().top);
 
 // 画面をスクロールをしたら動かしたい場合の記述
 $(window).scroll(function (){
     fadeAnime();/* アニメーション用の関数を呼ぶ*/
-});// ここまで画面をスクロールをしたら動かしたい場合の記述
+
+    if (Math.ceil($(this).scrollTop()) >= pos1 - windowHeight - 1000) {
+        $(".bgfix div").addClass("v1");
+        $(".bgfix div").removeClass("v2");
+    } else {
+        $(".bgfix div").removeClass("v1");
+    }
+
+    if (Math.ceil($(this).scrollTop()) >= pos2 - windowHeight - 1000) {
+        $(".bgfix div").addClass("v2");
+        $(".bgfix div").removeClass("v1");
+    } else {
+        $(".bgfix div").removeClass("v2");
+    }
+
+    if (Math.ceil($(this).scrollTop()) >= pos2) {
+        $(".bgfix div").removeClass("v1");
+        $(".bgfix div").removeClass("v2");
+    }
+
+})
 
 function fadeAnime(){
 
