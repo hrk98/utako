@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // ページ情報を更新
         const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
         const endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems);
-        const pageInfoText = `全${totalPages}ページ中${currentPage}ページ目 （ ${startItem}件目 〜 ${endItem}件目を表示 ）`;
+        const pageInfoText = `全${totalPages}ページ中${currentPage}ページ目（ ${startItem}件目 〜 ${endItem}件目を表示 ）`;
 
         pageInfoTopElement.textContent = pageInfoText;
         pageInfoBottomElement.textContent = pageInfoText;

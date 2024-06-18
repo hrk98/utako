@@ -4,7 +4,6 @@
     ヘッダー
 -----------------------------------------------------------------------------------------*/
 @include header {
-display: none;
 position: fixed;
 top: 0;
 left: 0;
@@ -52,15 +51,21 @@ a {
             -1px 1px 1px rgba($color: #ffffff, $alpha: 0.8), 1px -1px 1px rgba($color: #ffffff, $alpha: 0.8),
             0px 1px 1px rgba($color: #ffffff, $alpha: 0.8),  0 -1px 1px rgba($color: #ffffff, $alpha: 0.8),
             -1px 0 0 rgba($color: #ffffff, $alpha: 0.8), 1px 0 0 rgba($color: #ffffff, $alpha: 0.8);
+            @include media-min($BP_TM){
+                transition: all 0.2s ease-in-out;
+                &:hover {
+                    transform: translateY(-5px);
+                }
+            }
         }
         @include media-max($BP_TB){
             display: block;
             height: 100%;
             overflow: auto;
-            padding-left: 40px;
+            padding-left: 46px;
             li {
                 position: relative;
-                margin-top: 32px;
+                margin-top: 28px;
                 font-size: 18px;
                 font-weight: 600;
                 text-shadow: none;
@@ -78,7 +83,7 @@ a {
             &.is-on li a span {
                 animation-name: sphead;
                 animation-duration: 0.7s;
-                animation-delay: 0.3s;
+                animation-delay: 0.2s;
                 animation-fill-mode: forwards;
                 animation-timing-function: ease-out;
                 will-change: transform;
@@ -94,7 +99,7 @@ a {
             z-index: 100;
             padding: 80px 10px 100px;
             width: 100%;
-            height: 100vh;
+            height: 120vh;
             background-color: rgba($color: #ffffff, $alpha: 0.95);
         }
     }
@@ -174,8 +179,17 @@ background-color: #ffffff;
 box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.05);
 padding: 30px 10px 40px;
 text-align: center;
+@include media-max($BP_TB){
+    padding: 24px 0 40px;
+}
     .caution {
         margin-top: 20px;
+        @include media-max($BP_TB){
+            font-size: 12px;
+            padding: 0 30px;
+            line-height: 2;
+
+        }
     }
     .nav {
         margin-top: 30px;
@@ -190,10 +204,10 @@ text-align: center;
             border-left: dotted 1px;
             line-height: 1;
             @include media-max($BP_TB){
-                margin-top: 12px;
+                margin-top: 20px;
                 flex-basis: 33.3333333%;
                 padding: 0;
-                font-size: 13px;
+                font-size: 12px;
                 &:nth-child(4) {
                     border-left: none;
                 }
