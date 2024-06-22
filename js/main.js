@@ -1,6 +1,16 @@
 $(window).on('load',function() {
 
-    //$("#TOP").addClass("is-on");
+    var debug = true;
+    if(debug){
+        var result = prompt("パスワードを入力してください");
+        if(result == '801'){
+            $("#TOP").addClass("is-on");
+        }else {
+            $('body').remove();
+        }
+    }else {
+        $("#TOP").addClass("is-on");
+    }
 
 	$('a[href^="#"]').on("click", function() {
 

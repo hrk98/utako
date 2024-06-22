@@ -8,8 +8,15 @@
     margin: auto;
     max-width: 1900px;
     padding: 100px 30px;
+    overflow: hidden;
     @include media-max($BP_TB){
         padding: 80px 10px;
+    }
+    .wrap {
+        padding-top: 100px;
+        @include media-max($BP_TB){
+            padding-top: 80px;
+        }
     }
     .txt {
         margin-top: 40px;
@@ -18,7 +25,6 @@
         line-height: 2;
     }
     .title {
-        margin: 40px 0 0;
         padding: 0 0.8em;
         color: #494949;
         background: transparent;
@@ -66,9 +72,14 @@
             }
             h3 {
                 margin-top: 8px;
+                display: flex;
+                align-items: center;
+                min-height: 54px;
                 font-size: 18px;
                 line-height: 1.5;
                 @include media-max($BP_TB){
+                    display: block;
+                    min-height: auto;
                     font-size: 14px;
                 }
             }
@@ -78,7 +89,7 @@
                 overflow: hidden;
                 min-height: 96px;
                 background-color: #ffedf3;
-                @include bgimg('img_osusume_red.png',81844510_p2,14px);
+                @include bgimg('img_osusume_red.png',8px,16px);
                 background-size: 62px auto;
                 padding: 14px 10px 14px 78px;
                 color: #f84458;
@@ -97,6 +108,88 @@
                     text-align: right;
                 }
             }
+        }
+    }
+    .submenu {
+        position: fixed;
+        right: -320px;
+        bottom: 80px;
+        width: 320px;
+        max-height: calc(100vh - 200px);
+        border: solid 2px #4c537b;
+        border-right: none;
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        background-color: #fff;
+        overflow: hidden;
+        box-shadow: -3px 4px 4px 0px rgba(0, 0, 0, 0.15);
+        transition: all 0.4s;
+        &.active {
+            right: 0;
+        }
+        a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: $c_t;
+            border-bottom: dotted 1px;
+            line-height: 1.1;
+        }
+        nav {
+            overflow: auto;
+            position: relative;
+            padding: 30px 10px;
+        }
+        .close_btn {
+            display: block;
+            position: absolute;
+            right: 7px;
+            top: 7px;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #333;
+            background: #fff;
+            &::before, &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 3px; /* 棒の幅（太さ） */
+                height: 27px; /* 棒の高さ */
+                background: #333; /* バツ印の色 */
+            }
+            &::before {
+                transform: translate(-50%,-50%) rotate(45deg);
+            }
+            &::after {
+                transform: translate(-50%,-50%) rotate(-45deg);
+            }
+        }
+        .menulist {
+            display: flex;
+            flex-wrap: wrap;
+            li {
+                flex-basis: 50%;
+                padding: 4px 12px;
+            }
+        }
+    }
+    .subBtn {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        border-radius: 50px;
+        background-color: #4c537b;
+        padding: 12px 24px;
+        font-size: 13px;
+        color: #fff;
+        line-height: 1.1;
+        letter-spacing: 1px;
+        box-shadow: -3px 4px 6px 0px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        @include media-max($BP_TB){
+            right: 12px;
+            bottom: 12px;
         }
     }
 }
