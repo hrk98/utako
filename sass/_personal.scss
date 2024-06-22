@@ -113,7 +113,7 @@
     .submenu {
         position: fixed;
         right: -320px;
-        bottom: 80px;
+        bottom: 100px;
         width: 320px;
         max-height: calc(100vh - 200px);
         border: solid 2px #4c537b;
@@ -124,6 +124,9 @@
         overflow: hidden;
         box-shadow: -3px 4px 4px 0px rgba(0, 0, 0, 0.15);
         transition: all 0.4s;
+        @include media-max($BP_TB){
+            bottom: 65px;
+        }
         &.active {
             right: 0;
         }
