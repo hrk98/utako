@@ -28,7 +28,7 @@
         padding: 0 0.8em;
         color: #494949;
         background: transparent;
-        border-left: solid 8px #770d0d;
+        border-left: solid 8px #d92e42;
         letter-spacing: 1px;
 		font-size: 28px;
 		font-weight: 600;
@@ -57,7 +57,7 @@
                 flex-basis: calc(50% - 16px);
             }
             @include media-max($BP_SP){
-                margin: 30px 0;
+                margin: 50px 0;
             }
             .img {
                 overflow: hidden;
@@ -84,25 +84,33 @@
                 }
             }
             .comment {
-                margin-top: 12px;
+                margin-top: 10px;
                 border-radius: 8px;
                 overflow: hidden;
-                min-height: 96px;
-                background-color: #ffedf3;
+                /*background-color: #ffedf3;*/
+                background-color: #efefef;
                 @include bgimg('img_osusume_red.png',8px,16px);
                 background-size: 62px auto;
                 padding: 14px 10px 14px 78px;
-                color: #f84458;
+                box-shadow: 0 2px 3px rgba(0,0,0,.1);
+                /*color: #f84458;*/
+                color: #bb2233;
                 font-size: 12px;
                 font-weight: 700;
                 letter-spacing: 1px;
                 line-height: 2;
                 word-break: break-all;
                 p {
-                    margin-top: -4px;
+                    margin-top: -3px;
+                }
+                p:first-child {
+                    display: flex;
+                    align-items: center;
+                    min-height: 40px;
                 }
                 .name {
                     margin-top: 4px;
+                    min-height: auto;
                     letter-spacing: 2px;
                     line-height: 1;
                     text-align: right;
@@ -125,7 +133,7 @@
         box-shadow: -3px 4px 4px 0px rgba(0, 0, 0, 0.15);
         transition: all 0.4s;
         @include media-max($BP_TB){
-            bottom: 65px;
+            bottom: 60px;
         }
         &.active {
             right: 0;
@@ -141,13 +149,13 @@
         nav {
             overflow: auto;
             position: relative;
-            padding: 30px 10px;
+            padding: 32px 10px 28px;
         }
         .close_btn {
             display: block;
             position: absolute;
-            right: 7px;
-            top: 7px;
+            right: 6px;
+            top: 6px;
             width: 30px;
             height: 30px;
             border: 2px solid #333;
