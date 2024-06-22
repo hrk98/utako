@@ -1003,7 +1003,7 @@
 			</div>
 		</a></li>
 		<li><a href="https://www.youtube.com/watch?v=-_xYDF6lP4U" target="_blank">
-			<div class="img"><img src="./thumbnail/_xYDF6lP4U.webp" width="640" height="360" alt=""></div>
+			<div class="img"><img src="./thumbnail/xYDF6lP4U.webp" width="640" height="360" alt=""></div>
 			<h3>五七五オンラインで知らない人とBL俳句を作る</h3>
 			<div class="comment">
 				<p>次から次へと現れる俳人達とお姉さんが化学反応を起こし、珠玉の名(迷)俳句が多数生み出された。</p>
@@ -1483,7 +1483,7 @@
 			</div>
 		</a></li>
 		<li><a href="https://www.youtube.com/watch?v=_RVM0ilPYBQ" target="_blank">
-			<div class="img"><img src="./thumbnail/_RVM0ilPYBQ.webp" width="640" height="360" alt=""></div>
+			<div class="img"><img src="./thumbnail/RVM0ilPYBQ.webp" width="640" height="360" alt=""></div>
 			<h3>11/27リリース！CD「にじさんじMusic MIX UP!!」より【秘密の放課後〜貴方は染まらずにいられるか〜】by BGクラブ(鈴鹿詩子/森中花咲/モイラ)</h3>
 			<div class="comment">
 				<p>BGクラブ、宇田川 翔兄貴が手を組んだ曲。かっこよさと「ここ好き」が込められた曲</p>
@@ -1645,6 +1645,7 @@
 </div>
 <div id="subBtn" class="subBtn">目次を開く</div>
 <script>
+jQuery(function() {
 $('#subBtn').on("click", function() {
 	$('#submenu').toggleClass("active");
 	if($('#submenu').hasClass("active")){
@@ -1660,6 +1661,18 @@ $('#submenu .menulist a').on("click", function() {
 $('.close_btn').on("click", function() {
 	$('#submenu').removeClass("active");
 	$('#subBtn').text("目次を開く")
+});
+var footer = $('#footer').innerHeight();
+window.onscroll = function () {
+	var point = window.pageYOffset;
+	var docHeight = $(document).height();
+	var dispHeight = $(window).height(); 
+	if(point > docHeight-dispHeight-footer-15){ 
+		$('#subBtn').fadeOut();
+	}else{
+		$('#subBtn').fadeIn();
+	}
+};
 });
 </script>
 </main>
