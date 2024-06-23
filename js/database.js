@@ -24,6 +24,30 @@ document.addEventListener('DOMContentLoaded', () => {
         'processed-from-membership.json',
         'processed-external.json'
     ];
+    // 非公開リスト
+    const deleteID = [
+        'GVQJkA7F860',
+        'WH16JdWAqhA',
+        'cSsrzCuhH88',
+        'ouFw4NKD7Vk',
+        'QXoE2SO9mOA',
+        'Q2DWc8Cs348',
+        't7Pg1nZSzNU',
+        'XAu6XTBkZUg',
+        'hrC_jyIzetA',
+        'IB5LNsBWSoo',
+        'QOeGoB6gy5Q',
+        'r8iAnzzO_dE',
+        'O2VwpgzI0oQ',
+        'IbhSSN53F5E',
+        'XmsuhI2Wzn0',
+        '-iXs5mdJrEM',
+        'YWFGqcRfS_M',
+        'W-fmVIcwW-o',
+        'Fj4HIrXXwQo',
+        'TCNs5e6bk5Y',
+        'JkpIFMVnPoM'
+    ];
 
     // fetchリクエストを作成
     const fetchPromises = jsonFiles.map(file => fetch(`json/${file}`).then(response => {
@@ -120,8 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let htmlContent = '<ul class="list">';
         paginatedData.forEach((item, index) => {
             // 各プロパティの存在を確認
-            const title = item.title || '無題';
-            //const id = item.id;
+            const title = item.title || 'タイトル不明';
+            const id = item.id;
             const description = (item.description || '概要欄なし').replace(/\n/g, '<br>'); // 改行を反映
             const commentCount = item.statistics?.commentCount || '0';
             const likeCount = item.statistics?.likeCount || '0';
@@ -131,10 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const channelId = item.channelId || 'UCwokZsOK_uEre70XayaFnzA';
 
             // サムネイル画像のURLを確認し、存在しない場合はプレースホルダー画像を使用
-            const thumbnailUrl = item.thumbnails?.high?.url || 'https://via.placeholder.com/480x360?text=No+Image';
+            let thumbnailUrl = item.thumbnails?.high?.url || 'https://via.placeholder.com/480x360?text=No+Image';
 
             // startAtを日時の表記に変換
-            const startAt = item.time?.startAt ? new Date(item.time.startAt).toLocaleString() : '開始日時なし';
+            const startAt = item.time?.startAt ? new Date(item.time.startAt).toLocaleString() : '開始日時不明';
 
             // durationを時分秒に変換
             const duration = item.time?.duration ? convertDuration(item.time.duration) : '0';
@@ -146,11 +170,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const channelTitle = channelInfo ? channelInfo.title : '不明なチャンネル';
             const channelUrl = channelInfo ? channelInfo.url : '#';
 
+            let deleteClass = '';
+            if (deleteID.includes(id)) {
+                deleteClass = ' class="delete"';
+                thumbnailUrl = './img/noimage.png'; 
+            }
+
             htmlContent += `
-            <li>
+            <li${deleteClass}>
 			<div class="inner">
 			<a href="${url}" target="_blank">
-			<div class="img"><img src="${thumbnailUrl}" alt="${title}"><p class="time">${duration}</p></div>
+			<div class="img"><img src="${thumbnailUrl}" width="240" height="180" alt="${title}"><p class="time">${duration}</p></div>
 			<div class="txt">
 				<p class="no">${itemNumber}</p>
 				<div class="datech">
@@ -178,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			<div class="panel">
                 <p>${description}</p>
 			</div>
-            </li>
+            </li$>
             `;
         });
         htmlContent += '</ul>';
@@ -379,266 +409,307 @@ document.addEventListener('DOMContentLoaded', () => {
         sortAndDisplay(currentSortCriteria);
     });
     
+
     const channels = [
         {
-        id: "UCwokZsOK_uEre70XayaFnzA",
-        title: "鈴鹿詩子 Utako Suzuka",
-        url: "https://www.youtube.com/@suzukautako",
+            "id" : "UCjlmCrq4TP1I4xguOtJ-31w",
+            "title" : "でびでび・でびる",
+            "url" : "https:\/\/www.youtube.com\/@debidebidebiru"
         },
         {
-        id: "UCzuEc7Nsm9GtMX4yuzjSqgA",
-        title: "謎解き戦士 ガリベンガーV",
-        url: "https://www.youtube.com/@garibenv",
+            "id" : "UCLhUvJ_wO9hOvv_yYENu4fQ",
+            "title" : "Siro Channel",
+            "url" : "https:\/\/www.youtube.com\/@cybergirlsiro"
         },
         {
-        id: "UCeLzT-7b2PBcunJplmWtoDg",
-        title: "Patra Channel / 周防パトラ",
-        url: "https://www.youtube.com/@patra_suou",
+            "id" : "UCM9B5B7NjnO7z6uPXixMa7w",
+            "title" : "文化放送V&R",
+            "url" : "https:\/\/www.youtube.com\/@vr6843"
         },
         {
-        id: "UCfM_A7lE6LkGrzx6_mOtI4g",
-        title: "雪汝*setsuna channel",
-        url: "https://www.youtube.com/@setsunachannel3198",
+            "id" : "UC18PnlH3OFTrFlA8RXh7XOw",
+            "title" : "VARKチャンネル",
+            "url" : "https:\/\/www.youtube.com\/@vark5890"
         },
         {
-        id: "UCmUjjW5zF1MMOhYUwwwQv9Q",
-        title: "宇志海いちご",
-        url: "https://www.youtube.com/@ushimiichigo",
+            "id" : "UC8NZiqKx6fsDT3AVcMiVFyA",
+            "title" : "Tamaki Ch. 犬山たまき \/ 佃煮のりお",
+            "url" : "https:\/\/www.youtube.com\/@noripro"
         },
         {
-        id: "UCqXvL55GYHtRZhBS03LVGnQ",
-        title: "楪 帆波-Yuzuriha Honami-",
-        url: "https://www.youtube.com/@yuzuriha_honami",
+            "id" : "UCXU7YYxy_iQd3ulXyO-zC2w",
+            "title" : "伏見ガク【にじさんじ所属】",
+            "url" : "https:\/\/www.youtube.com\/@fushimigaku"
         },
         {
-        id: "UCryOPk2GZ1meIDt53tL30Tw",
-        title: "鈴木勝 / Suzuki Masaru【にじさんじ】",
-        url: "https://www.youtube.com/@suzukimasaru",
+            "id" : "UCvmppcdYf4HOv-tFQhHHJMA",
+            "title" : "《にじさんじ所属の女神》モイラ",
+            "url" : "https:\/\/www.youtube.com\/@moira"
         },
         {
-        id: "UCjlmCrq4TP1I4xguOtJ-31w",
-        title: "でびでび・でびる",
-        url: "https://www.youtube.com/@debidebidebiru",
+            "id" : "UCt0clH12Xk1-Ej5PXKGfdPA",
+            "title" : "♥️♠️物述有栖♦️♣️",
+            "url" : "https:\/\/www.youtube.com\/@mononobealice"
         },
         {
-        id: "UCl1oLKcAq93p-pwKfDGhiYQ",
-        title: "えま★おうがすと / Emma★August【にじさんじ】",
-        url: "https://www.youtube.com/@emmaaugust",
+            "id" : "UC1zFJrfEKvCixhsjNSb1toQ",
+            "title" : "シスター・クレア -SisterClaire-",
+            "url" : "https:\/\/www.youtube.com\/@sister_claire"
         },
         {
-        id: "UCiLhMk-gmE2zgF7KGVyqvFw",
-        title: "RK Music",
-        url: "https://www.youtube.com/@rkmusic_inc",
+            "id" : "UCtpB6Bvhs1Um93ziEDACQ8g",
+            "title" : "Kazaki Ch. ‐ 森中花咲 ‐",
+            "url" : "https:\/\/www.youtube.com\/@morinakakazaki"
         },
         {
-        id: "UCsFn_ueskBkMCEyzCEqAOvg",
-        title: "花畑チャイカ",
-        url: "https://www.youtube.com/@hanabatakechaika",
+            "id" : "UCl1oLKcAq93p-pwKfDGhiYQ",
+            "title" : "えま★おうがすと \/ Emma★August【にじさんじ】",
+            "url" : "https:\/\/www.youtube.com\/@emmaaugust"
         },
         {
-        id: "UCb5JxV6vKlYVknoJB8TnyYg",
-        title: "黛 灰 / Kai Mayuzumi【にじさんじ】",
-        url: "https://www.youtube.com/@mayuzumikai",
+            "id" : "UChKXd7oqD18qiIYBoRIHTlw",
+            "title" : "Meloco Kyoran【NIJISANJI EN】",
+            "url" : "https:\/\/www.youtube.com\/@melocokyoran"
         },
         {
-        id: "UCv1fFr156jc65EMiLbaLImw",
-        title: "剣持刀也",
-        url: "https://www.youtube.com/@kenmochitoya",
+            "id" : "UCuvk5PilcvDECU7dDZhQiEw",
+            "title" : "白雪 巴\/Shirayuki Tomoe",
+            "url" : "https:\/\/www.youtube.com\/@shirayukitomoe"
         },
         {
-        id: "UCvmppcdYf4HOv-tFQhHHJMA",
-        title: "《にじさんじ所属の女神》モイラ",
-        url: "https://www.youtube.com/@moira",
+            "id" : "UC1CfXB_kRs3C-zaeTG3oGyg",
+            "title" : "HAACHAMA Ch 赤井はあと",
+            "url" : "https:\/\/www.youtube.com\/@akaihaato"
         },
         {
-        id: "UCt0clH12Xk1-Ej5PXKGfdPA",
-        title: "♥️♠️物述有栖♦️♣️",
-        url: "https://www.youtube.com/@mononobealice",
+            "id" : "UCiLhMk-gmE2zgF7KGVyqvFw",
+            "title" : "RK Music",
+            "url" : "https:\/\/www.youtube.com\/@rkmusic_inc"
         },
         {
-        id: "UCtpB6Bvhs1Um93ziEDACQ8g",
-        title: "Kazaki Ch. ‐ 森中花咲 ‐",
-        url: "https://www.youtube.com/@morinakakazaki",
+            "id" : "UC085EUmQKG8Tt1gVCP3RmnQ",
+            "title" : "room6 LLC.",
+            "url" : "https:\/\/www.youtube.com\/@6moor"
         },
         {
-        id: "UCsg-YqdqQ-KFF0LNk23BY4A",
-        title: "樋口楓【にじさんじ所属】",
-        url: "https://www.youtube.com/@higuchikaede",
+            "id" : "UC8_LSK-WqO_GyH6iPlbdatQ",
+            "title" : "日テレ×VTuber【公式】",
+            "url" : "https:\/\/www.youtube.com\/@clan_vtuber"
         },
         {
-        id: "UCwokZsOK_uEre70XayaFnzA",
-        title: "鈴鹿詩子 Utako Suzuka",
-        url: "https://www.youtube.com/@suzukautako",
+            "id" : "UCt30jJgChL8qeT9VPadidSw",
+            "title" : "しぐれうい",
+            "url" : "https:\/\/www.youtube.com\/@ui_shig"
         },
         {
-        id: "UCuvk5PilcvDECU7dDZhQiEw",
-        title: "白雪 巴/Shirayuki Tomoe",
-        url: "https://www.youtube.com/@shirayukitomoe",
+            "id" : "UCuycJ_IsA5ESbTYhe05ozqQ",
+            "title" : "レグルシュ・ライオンハートReglush Lionheart",
+            "url" : "https:\/\/www.youtube.com\/@reglushlionheart"
         },
         {
-        id: "UCt30jJgChL8qeT9VPadidSw",
-        title: "しぐれうい",
-        url: "https://www.youtube.com/@ui_shig",
+            "id" : "UCsFn_ueskBkMCEyzCEqAOvg",
+            "title" : "花畑チャイカ",
+            "url" : "https:\/\/www.youtube.com\/@hanabatakechaika"
         },
         {
-        id: "UCt5-0i4AVHXaWJrL8Wql3mw",
-        title: "緑仙 / Ryushen",
-        url: "https://www.youtube.com/@ryushen",
+            "id" : "UCD-miitqNY3nyukJ4Fnf4_A",
+            "title" : "月ノ美兎",
+            "url" : "https:\/\/www.youtube.com\/@tsukinomito"
         },
         {
-        id: "UCtnO2N4kPTXmyvedjGWdx3Q",
-        title: "レヴィ・エリファ-Levi Elipha-",
-        url: "https://www.youtube.com/@levielipha",
+            "id" : "UCPvGypSgfDkVe7JG2KygK7A",
+            "title" : "竜胆 尊 \/ Rindou Mikoto",
+            "url" : "https:\/\/www.youtube.com\/@rindoumikoto"
         },
         {
-        id: "UC1suqwovbL1kzsoaZgFZLKg",
-        title: "Choco Ch. 癒月ちょこ",
-        url: "https://www.youtube.com/@yuzukichoco",
+            "id" : "UCqXvL55GYHtRZhBS03LVGnQ",
+            "title" : "楪 帆波-Yuzuriha Honami-",
+            "url" : "https:\/\/www.youtube.com\/@yuzuriha_honami"
         },
         {
-        id: "UC18PnlH3OFTrFlA8RXh7XOw",
-        title: "VARKチャンネル",
-        url: "https://www.youtube.com/@vark5890",
+            "id" : "UC53UDnhAAYwvNO7j_2Ju1cQ",
+            "title" : "ドーラ",
+            "url" : "https:\/\/www.youtube.com\/@dola"
         },
         {
-        id: "UC2Rr7mILebYLTjd38DNNUTw",
-        title: "Fairys Channel",
-        url: "https://www.youtube.com/@fairyschannel",
+            "id" : "UC9V3Y3_uzU5e-usObb6IE1w",
+            "title" : "星川サラ \/ Sara Hoshikawa",
+            "url" : "https:\/\/www.youtube.com\/@hoshikawasara"
         },
         {
-        id: "UC1CfXB_kRs3C-zaeTG3oGyg",
-        title: "HAACHAMA Ch 赤井はあと",
-        url: "https://www.youtube.com/@akaihaato",
+            "id" : "UCwrjITPwG4q71HzihV2C7Nw",
+            "title" : "フミ\/にじさんじ",
+            "url" : "https:\/\/www.youtube.com\/@fumi"
         },
         {
-        id: "UC1QgXt46-GEvtNjEC1paHnw",
-        title: "グウェル・オス・ガール / Gwelu Os Gar 【にじさんじ】",
-        url: "https://www.youtube.com/@gweluosgar",
+            "id" : "UC0Owc36U9lOyi9Gx9Ic-4qg",
+            "title" : "Haneru Channel \/ 因幡はねる 【ななしいんく】",
+            "url" : "https:\/\/www.youtube.com\/@inaba_haneru"
         },
         {
-        id: "UC0Owc36U9lOyi9Gx9Ic-4qg",
-        title: "Haneru Channel / 因幡はねる 【ななしいんく】",
-        url: "https://www.youtube.com/@inaba_haneru",
+            "id" : "UCb5JxV6vKlYVknoJB8TnyYg",
+            "title" : "黛 灰 \/ Kai Mayuzumi【にじさんじ】",
+            "url" : "https:\/\/www.youtube.com\/@mayuzumikai"
         },
         {
-        id: "UC0g1AE0DOjBYnLhkgoRWN1w",
-        title: "本間ひまわり - Himawari Honma -",
-        url: "https://www.youtube.com/@honmahimawari",
+            "id" : "UC1suqwovbL1kzsoaZgFZLKg",
+            "title" : "Choco Ch. 癒月ちょこ",
+            "url" : "https:\/\/www.youtube.com\/@yuzukichoco"
         },
         {
-        id: "UC1EB8moGYdkoZQfWHjh7Ivw",
-        title: "ぽんぽこちゃんねる",
-        url: "https://www.youtube.com/@pokopea",
+            "id" : "UCtnO2N4kPTXmyvedjGWdx3Q",
+            "title" : "レヴィ・エリファ-Levi Elipha-",
+            "url" : "https:\/\/www.youtube.com\/@levielipha"
         },
         {
-        id: "UC1zFJrfEKvCixhsjNSb1toQ",
-        title: "シスター・クレア -SisterClaire-",
-        url: "https://www.youtube.com/@sister_claire",
+            "id" : "UC48jH1ul-6HOrcSSfoR02fQ",
+            "title" : "Yuhi Riri Official",
+            "url" : "https:\/\/www.youtube.com\/@yuhiriri"
         },
         {
-        id: "UC2OacIzd2UxGHRGhdHl1Rhw",
-        title: "早瀬 走 / Hayase Sou【にじさんじ所属】",
-        url: "https://www.youtube.com/@hayasesou",
+            "id" : "UCcDDxnoQcezyTUzHg5uHaKg",
+            "title" : "四季凪アキラ \/ Shikinagi Akira",
+            "url" : "https:\/\/www.youtube.com\/@shikinagiakira"
         },
         {
-        id: "UCD-miitqNY3nyukJ4Fnf4_A",
-        title: "月ノ美兎",
-        url: "https://www.youtube.com/@tsukinomito",
+            "id" : "UCsg-YqdqQ-KFF0LNk23BY4A",
+            "title" : "樋口楓【にじさんじ所属】",
+            "url" : "https:\/\/www.youtube.com\/@higuchikaede"
         },
         {
-        id: "UC9V3Y3_uzU5e-usObb6IE1w",
-        title: "星川サラ / Sara Hoshikawa",
-        url: "https://www.youtube.com/@hoshikawasara",
+            "id" : "UC1QgXt46-GEvtNjEC1paHnw",
+            "title" : "グウェル・オス・ガール \/ Gwelu Os Gar 【にじさんじ】",
+            "url" : "https:\/\/www.youtube.com\/@gweluosgar"
         },
         {
-        id: "UC6TfqY40Xt1Y0J-N18c85qQ",
-        title: "安土桃",
-        url: "https://www.youtube.com/@azuchimomo",
+            "id" : "UC_GCs6GARLxEHxy1w40d6VQ",
+            "title" : "家長むぎ【にじさんじ所属】",
+            "url" : "https:\/\/www.youtube.com\/@ienagamugi"
         },
         {
-        id: "UC8NZiqKx6fsDT3AVcMiVFyA",
-        title: "Tamaki Ch. 犬山たまき / 佃煮のりお",
-        url: "https://www.youtube.com/@noripro",
+            "id" : "UCwokZsOK_uEre70XayaFnzA",
+            "title" : "鈴鹿詩子 Utako Suzuka",
+            "url" : "https:\/\/www.youtube.com\/@suzukautako"
         },
         {
-        id: "UC8_LSK-WqO_GyH6iPlbdatQ",
-        title: "日テレ×VTuber【公式】",
-        url: "https://www.youtube.com/@clan_vtuber",
+            "id" : "UCAZ_LA7f0sjuZ1Ni8L2uITw",
+            "title" : "どっとライブ",
+            "url" : "https:\/\/www.youtube.com\/@_dotlive"
         },
         {
-        id: "UCAZ_LA7f0sjuZ1Ni8L2uITw",
-        title: "どっとライブ",
-        url: "https://www.youtube.com/@_dotlive",
+            "id" : "UCryOPk2GZ1meIDt53tL30Tw",
+            "title" : "鈴木勝 \/ Suzuki Masaru【にじさんじ】",
+            "url" : "https:\/\/www.youtube.com\/@suzukimasaru"
         },
         {
-        id: "UCJubINhCcFXlsBwnHp0wl_g",
-        title: "舞元啓介",
-        url: "https://www.youtube.com/@maimotokeisuke",
+            "id" : "UCZ1xuCK1kNmn5RzPYIZop3w",
+            "title" : "リゼ・ヘルエスタ -Lize Helesta-",
+            "url" : "https:\/\/www.youtube.com\/@lizehelesta"
         },
         {
-        id: "UCHVXbQzkl3rDfsXWo8xi2qw",
-        title: "アンジュ・カトリーナ - Ange Katrina -",
-        url: "https://www.youtube.com/@angekatrina",
+            "id" : "UCX7YkU9nEeaoZbkVLVajcMg",
+            "title" : "にじさんじ",
+            "url" : "https:\/\/www.youtube.com\/@nijisanji"
         },
         {
-        id: "UCBiqkFJljoxAj10SoP2w2Cg",
-        title: "文野環【にじさんじの野良猫】ふみのたまき",
-        url: "https://www.youtube.com/@fuminotamaki",
+            "id" : "UC6TfqY40Xt1Y0J-N18c85qQ",
+            "title" : "安土桃",
+            "url" : "https:\/\/www.youtube.com\/@azuchimomo"
         },
         {
-        id: "UCIG9rDtgR45VCZmYnd-4DUw",
-        title: "ラトナ・プティ -Ratna Petit -にじさんじ所属",
-        url: "https://www.youtube.com/@ratnapetit",
+            "id" : "UCT1AQFit-Eaj_YQMsfV0RhQ",
+            "title" : "銀河アリスの地球侵略ch.",
+            "url" : "https:\/\/www.youtube.com\/@gingaalice"
         },
         {
-        id: "UCYKP16oMX9KKPbrNgo_Kgag",
-        title: "える / Elu【にじさんじ】",
-        url: "https://www.youtube.com/@elu",
+            "id" : "UCBiqkFJljoxAj10SoP2w2Cg",
+            "title" : "文野環【にじさんじの野良猫】ふみのたまき",
+            "url" : "https:\/\/www.youtube.com\/@fuminotamaki"
         },
         {
-        id: "UCZ1xuCK1kNmn5RzPYIZop3w",
-        title: "リゼ・ヘルエスタ -Lize Helesta-",
-        url: "https://www.youtube.com/@lizehelesta",
+            "id" : "UC1EB8moGYdkoZQfWHjh7Ivw",
+            "title" : "ぽんぽこちゃんねる",
+            "url" : "https:\/\/www.youtube.com\/@pokopea"
         },
         {
-        id: "UCT1AQFit-Eaj_YQMsfV0RhQ",
-        title: "銀河アリスの地球侵略ch.",
-        url: "https://www.youtube.com/@gingaalice",
+            "id" : "UCfM_A7lE6LkGrzx6_mOtI4g",
+            "title" : "雪汝*setsuna channel",
+            "url" : "https:\/\/www.youtube.com\/@setsunachannel3198"
         },
         {
-        id: "UCXU7YYxy_iQd3ulXyO-zC2w",
-        title: "伏見ガク【にじさんじ所属】",
-        url: "https://www.youtube.com/@fushimigaku",
+            "id" : "UCv1fFr156jc65EMiLbaLImw",
+            "title" : "剣持刀也",
+            "url" : "https:\/\/www.youtube.com\/@kenmochitoya"
         },
         {
-        id: "UC_T8F2CvqZOwa2kme0WwRhg",
-        title: "にじさんじ公式切り抜きチャンネル【NIJISANJI Official Best Moments】",
-        url: "https://www.youtube.com/@nijisanji_kirinuki",
+            "id" : "UCeLzT-7b2PBcunJplmWtoDg",
+            "title" : "Patra Channel \/ 周防パトラ",
+            "url" : "https:\/\/www.youtube.com\/@patra_suou"
         },
         {
-        id: "UCV5ZZlLjk5MKGg3L0n0vbzw",
-        title: "鷹宮リオン / Rion Takamiya",
-        url: "https://www.youtube.com/@takamiyarion",
+            "id" : "UCzuEc7Nsm9GtMX4yuzjSqgA",
+            "title" : "謎解き戦士 ガリベンガーV",
+            "url" : "https:\/\/www.youtube.com\/@garibenv"
         },
         {
-        id: "UCX7YkU9nEeaoZbkVLVajcMg",
-        title: "にじさんじ",
-        url: "https://www.youtube.com/@nijisanji",
+            "id" : "UC0g1AE0DOjBYnLhkgoRWN1w",
+            "title" : "本間ひまわり - Himawari Honma -",
+            "url" : "https:\/\/www.youtube.com\/@honmahimawari"
         },
         {
-        id: "UCM9B5B7NjnO7z6uPXixMa7w",
-        title: "文化放送V&R",
-        url: "https://www.youtube.com/@vr6843",
+            "id" : "UC_T8F2CvqZOwa2kme0WwRhg",
+            "title" : "にじさんじ公式切り抜きチャンネル【NIJISANJI Official Best Moments】",
+            "url" : "https:\/\/www.youtube.com\/@nijisanji_kirinuki"
         },
         {
-        id: "UCLhUvJ_wO9hOvv_yYENu4fQ",
-        title: "Siro Channel",
-        url: "https://www.youtube.com/@cybergirlsiro",
+            "id" : "UCHVXbQzkl3rDfsXWo8xi2qw",
+            "title" : "アンジュ・カトリーナ - Ange Katrina -",
+            "url" : "https:\/\/www.youtube.com\/@angekatrina"
         },
         {
-        id: "UCPvGypSgfDkVe7JG2KygK7A",
-        title: "竜胆 尊 / Rindou Mikoto",
-        url: "https://www.youtube.com/@rindoumikoto",
+            "id" : "UCIG9rDtgR45VCZmYnd-4DUw",
+            "title" : "ラトナ・プティ -Ratna Petit -にじさんじ所属",
+            "url" : "https:\/\/www.youtube.com\/@ratnapetit"
+        },
+        {
+            "id" : "UC2OacIzd2UxGHRGhdHl1Rhw",
+            "title" : "早瀬 走 \/ Hayase Sou【にじさんじ所属】",
+            "url" : "https:\/\/www.youtube.com\/@hayasesou"
+        },
+        {
+            "id" : "UCRm6lqtdxs_Qo6HeL-SRQ-w",
+            "title" : "レイン・パターソン／Lain Paterson【にじさんじ】",
+            "url" : "https:\/\/www.youtube.com\/@lainpaterson"
+        },
+        {
+            "id" : "UCJubINhCcFXlsBwnHp0wl_g",
+            "title" : "舞元啓介",
+            "url" : "https:\/\/www.youtube.com\/@maimotokeisuke"
+        },
+        {
+            "id" : "UCt5-0i4AVHXaWJrL8Wql3mw",
+            "title" : "緑仙 \/ Ryushen",
+            "url" : "https:\/\/www.youtube.com\/@ryushen"
+        },
+        {
+            "id" : "UCmUjjW5zF1MMOhYUwwwQv9Q",
+            "title" : "宇志海いちご",
+            "url" : "https:\/\/www.youtube.com\/@ushimiichigo"
+        },
+        {
+            "id" : "UC2Rr7mILebYLTjd38DNNUTw",
+            "title" : "Fairys Channel",
+            "url" : "https:\/\/www.youtube.com\/@fairyschannel"
+        },
+        {
+            "id" : "UCV5ZZlLjk5MKGg3L0n0vbzw",
+            "title" : "鷹宮リオン \/ Rion Takamiya",
+            "url" : "https:\/\/www.youtube.com\/@takamiyarion"
+        },
+        {
+            "id" : "UCYKP16oMX9KKPbrNgo_Kgag",
+            "title" : "える \/ Elu【にじさんじ】",
+            "url" : "https:\/\/www.youtube.com\/@elu"
         }
     ];
 

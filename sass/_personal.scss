@@ -25,7 +25,7 @@
         line-height: 2;
     }
     .title {
-        padding: 0 0.8em;
+        padding-left: 20px;
         color: #494949;
         background: transparent;
         border-left: solid 8px #d92e42;
@@ -418,6 +418,9 @@
             @include media-max($BP_HD2){
                 margin: 8px;
             }
+            &.delete {
+                background-color: #e7e7e7;
+            }
             a {
                 display: inline-block;
                 text-decoration: none;
@@ -534,6 +537,7 @@
                     display: flex;
                     align-items: center;
                     .date {
+                        flex-shrink: 0;
                         color: #60160d;
                         font-weight: 600;
                         font-size: 17px;
@@ -548,6 +552,9 @@
                         font-size: 15px;
                         line-height: 1;
                         color: #808080;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                         @include media-max($BP_TB2){
                             display: none;
                         }
