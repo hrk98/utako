@@ -3,11 +3,6 @@ $(window).on('load',function() {
     var hashString = location.hash.substr(1); // remove '#'
     history.replaceState('', document.title, window.location.pathname);
 
-    $("#splash").delay(1500).fadeOut('slow', function() {
-        $("#mv").addClass("is-on");
-    });
-    $("#splash_logo").delay(1200).fadeOut('slow');
-
     const profile = $('#profile');
     const glossary = $('#glossary');
     const utakoswitch = $('#switch');

@@ -1,5 +1,10 @@
 $(window).on('load',function() {
 
+    $("#splash").delay(1500).fadeOut('slow', function() {
+        $("#mv").addClass("is-on");
+    });
+    $("#splash_logo").delay(1200).fadeOut('slow');
+
     var debug = true;
     if(debug){
         var result = prompt("パスワードを入力してください");
