@@ -4,33 +4,52 @@
     // セクション
 -----------------------------------------------------------------------------------------*/
 
-.bgfix {
-    position: relative;
-    height: 500px;
+#bgfix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    &.v1 {
+        @include bgimg('rush_bg.webp');
+        background-repeat: repeat;
+        background-size: 1200px;
+        @include media-max(1200px){
+            background-size: 100% auto;
+        }
+    }
+    &.v2 {
+        @include bgimg('liveutako.webp');
+        background-repeat: no-repeat;
+        background-size: cover;
+        @include media-max($BP_TB){
+            background-image: url(../img/105691803_p0.webp);
+        }
+    }
+    &.v3 {
+        @include bgimg('105691803_p0.webp');
+        background-repeat: no-repeat;
+        background-size: cover;
+        @include media-max($BP_TB){
+            background-image: url(../img/sakyubasu.webp);
+        }
+    }
+    &.v4 {
+        @include bgimg('FQucno6VsAIBkKn.webp');
+        background-repeat: no-repeat;
+        background-size: cover;
+        @include media-max(1200px){
+            background-image: url(../img/EK9amIsU0AAeE5.webp);
+        }
+    }
+}
+
+.bgfixWrap {
+    padding: 0 0 400px;
     box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
     @include media-max($BP_TB){
-        height: 250px;
-    }
-    div {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        width: 100%;
-        height: 100vh;
-        background-size: cover;
-        &.v1 {
-            @include bgimg('liveutako.webp');
-            @include media-max($BP_TB){
-                background-image: url(../img/105691803_p0.webp);
-            }
-        }
-        &.v2 {
-            @include bgimg('105691803_p0.webp');
-            @include media-max($BP_TB){
-                background-image: url(../img/sakyubasu.webp);
-            }
-        }
+        padding: 0 0 250px;
     }
 }
 
@@ -1112,6 +1131,9 @@ position: relative;
     overflow: hidden;
     .swiper-wrapper {
         transition-timing-function: linear;
+        img {
+            width: 100%;
+        }
     }
 }
 
@@ -1505,13 +1527,11 @@ position: relative;
 
 
 .archive {
-    border-top: 5px solid #c5293b;
-    border-bottom: 5px solid #c5293b;
-    background-color: #fef9ee;
+    background-color: #ffffff;
     text-align: center;
-    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .6);
+    box-shadow: -5px -5px 10px 0px rgba(255, 255, 255, 0.5), 5px 5px 10px 0px rgba(0, 0, 0, 0.3);
     @include media-max($BP_TB){
-        padding: 20px 28px 30px 24px;
+        padding: 30px 14px 40px 12px;
     }
     .txt {
         margin-top: 40px;
@@ -1520,7 +1540,7 @@ position: relative;
     .bnr {
         position: relative;
         z-index: 2;
-        margin-top: 10px;
+        margin-top: 20px;
         display: inline-block;
         &::after {
             content: "";
@@ -1534,22 +1554,21 @@ position: relative;
             height: 100%;
             background-color: #802727;
             @include media-max($BP_TB){
-                border-radius: 6px;
+                left: 6px;
+                top: 6px;
+                border-radius: 3px;
             }
         }
     }
 }
-
 
 
 .database {
-    border-top: 5px solid #009999;
-    border-bottom: 5px solid #009999;
-    background-color: #fef9ee;
+    background-color: #d2d7d0;
     text-align: center;
-    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .6);
+    box-shadow: -5px -5px 10px 0px rgba(255, 255, 255, 0.5), 5px 5px 10px 0px rgba(0, 0, 0, 0.3);
     @include media-max($BP_TB){
-        padding: 20px 28px 30px 24px;
+        padding: 30px 14px 40px 12px;
     }
     .txt {
         margin-top: 40px;
@@ -1558,7 +1577,7 @@ position: relative;
     .bnr {
         position: relative;
         z-index: 2;
-        margin-top: 10px;
+        margin-top: 20px;
         display: inline-block;
         &::after {
             content: "";
@@ -1570,10 +1589,59 @@ position: relative;
             border-radius: 16px;
             width: 100%;
             height: 100%;
-            background-color: #802727;
+            background-color: #195731;
             @include media-max($BP_TB){
-                border-radius: 6px;
+                left: 6px;
+                top: 6px;
+                border-radius: 3px;
             }
         }
     }
 }
+
+
+.bannerArea {
+    position: relative;
+    background-color: #fbfbfb;
+    padding: 20px;
+    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    @include media-max($BP_TB){
+        display: block;
+        padding: 10px;
+    }
+    .bnr {
+        position: relative;
+        margin: 20px;
+        max-width: 728px;
+        z-index: 10;
+        @include media-max($BP_TB){
+            margin: 25px 10px;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            z-index: -1;
+            display: block;
+            border-radius: 16px;
+            width: 100%;
+            height: 100%;
+            background-color: #767676;
+            @include media-max($BP_TB){
+                left: 6px;
+                top: 6px;
+                border-radius: 3px;
+            }
+        }
+        a {
+            display: inline-block;
+        }
+    }
+}
+
+
+
+

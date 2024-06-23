@@ -51,7 +51,6 @@
 ┗━♡━━━━♡━┛
 -->
 </head>
-
 <body>
 <div id="TOP">
 <header id="header">
@@ -75,7 +74,7 @@
 </header>
 
 <main id="contents">
-
+<div id="bgfix"></div>
 <div id="mv" class="mv">
 <div class="inner">
 <div class="box">
@@ -129,8 +128,10 @@
 </div>
 </div>
 
-<div class="bgRushWrap">
-<div class="bgRush"></div>
+<div class="bgfixWrap"></div>
+
+
+
 <section id="history" class="cont history">
 	<hgroup class="ttl">
 		<p class="sub">History</p>
@@ -906,9 +907,23 @@
 
 	</ol>
 </section>
+
+
+<div class="bgfixWrap">
+	<section id="database" class="cont database">
+		<hgroup class="ttl">
+			<p class="sub">Database</p>
+			<h2>全配信検索データベース</h2>
+		</hgroup>
+		<p class="txt">
+			詩子お姉さん関連のアーカイブをデータベース化しました<br>
+			タイトルで検索したり、絞り込んで表示したりできます<br>
+			お姉さん以外のチャンネルのコラボにも対応しています
+		</p>
+		<div class="bnr"><a href="./database.html"><img src="./img/bnr_database_04.webp" width="728" alt="鈴鹿詩子 全配信データベース"></a></div>
+	</section>
 </div>
 
-<div class="bgfix"><div></div></div>
 
 <div class="glossaryWrap2">
 <div class="glossaryWrap">
@@ -1087,7 +1102,18 @@
 </div>
 
 
-<div class="bgfix"><div></div></div>
+
+<div class="bgfixWrap">
+<section id="archive" class="cont archive">
+	<hgroup class="ttl">
+		<p class="sub">Archive</p>
+		<h2>おすすめアーカイブ</h2>
+	</hgroup>
+	<p class="txt">詩子お姉さんのアーカイブからおすすめを選びました<br>選んだうたっこの推薦コメント付きです</p>
+	<div class="bnr"><a href="./archive.html"><img src="./img/bnr_archive_04.webp" width="728" alt="詩子お姉さんのおすすめアーカイブ"></a></div>
+</section>
+</div>
+
 
 
 <div class="switchWrap">
@@ -1351,24 +1377,7 @@
 </div>
 
 
-<section id="archive" class="cont archive">
-	<hgroup class="ttl">
-		<p class="sub">Archive</p>
-		<h2>おすすめアーカイブ</h2>
-	</hgroup>
-	<p class="txt">※未完成。今後増やしていく予定です。</p>
-	<div class="bnr"><a href="./archive.html"><img src="./img/bnr_archive_03.png" width="728" alt="詩子お姉さんのおすすめアーカイブ"></a></div>
-</section>
-
-
-<section id="database" class="cont database">
-	<hgroup class="ttl">
-		<p class="sub">Database</p>
-		<h2>全配信検索データベース</h2>
-	</hgroup>
-	<p class="txt">テスト</p>
-	<div class="bnr"><a href="./database.html"><img src="./img/bnr_database_04.png" width="728" alt="鈴鹿詩子 全配信データベース"></a></div>
-</section>
+<div class="bgfixWrap"></div>
 
 
 <section id="activities" class="activities">
@@ -1538,11 +1547,14 @@ const mySwiper = new Swiper('.swiper', {
 
 </script>
 
-
-
 <div class="swiper2">
 	<div class="swiper-wrapper">
-		<div class="swiper-slide"><img src="./img/cbr.webp" width="100%" alt=""></div>
+		<div class="swiper-slide">
+			<picture>
+				<source srcset="./img/cbr_sp.webp" media="(max-width: 768px)" type="image/png">
+				<img src="./img/cbr.webp" width="" alt="">
+			</picture>
+		</div>
 	</div>
 </div>
 <script>
@@ -1987,6 +1999,12 @@ var swiper = new Swiper('.swiper2', {
 </section>
 
 
+<div class="bannerArea">
+	<div class="bnr"><a href="./database.html"><img src="./img/bnr_database_04.webp" width="728" alt="鈴鹿詩子 全配信データベース"></a></div>
+	<div class="bnr"><a href="./archive.html"><img src="./img/bnr_archive_04.webp" width="728" alt="詩子お姉さんのおすすめアーカイブ"></a></div>
+</div>
+
+
 <section id="specialthanks" class="cont specialthanks">
 	<hgroup class="ttl">
 		<p class="sub">Special Thanks</p>
@@ -2039,6 +2057,10 @@ var swiper = new Swiper('.swiper2', {
 		<dl>
 			<dt>制作協力</dt>
 			<dd>パロ</dd>
+		</dl>
+		<dl>
+			<dt>データ提供</dt>
+			<dd>やきそばパン</dd>
 		</dl>
 	</div>
 	<ul class="list">
@@ -2113,6 +2135,14 @@ var swiper = new Swiper('.swiper2', {
 		<li>rusk</li>
 		<li>水面(ミナモ)</li>
 		<li>ヘンデ</li>
+		<li>AIAI</li>
+		<li>あっぴー</li>
+		<li>ひなた</li>
+		<li>中菊</li>
+		<li>カリ雄トロの尻</li>
+		<li>おとうふ</li>
+		<li>火影</li>
+		<li>星葡萄☆(れいずん)</li>
 	</ul>
 	<div class="tip zibun">
 		<dl>
@@ -2125,9 +2155,8 @@ var swiper = new Swiper('.swiper2', {
 
 </main>
 
-
 <footer id="footer">
-	<div><a href="#TOP"><img src="./img/utako_logo.png" width="220" height="98" alt="鈴鹿詩子 非公式ファンサイト"></a></div>
+	<div><a href="index.html"><img src="./img/utako_logo.png" width="220" height="98" alt="鈴鹿詩子 非公式ファンサイト"></a></div>
 	<ul class="nav">
 		<li><a href="#history">活動年表</a></li>
 		<li><a href="#glossary">詩子用語集</a></li>
@@ -2136,11 +2165,11 @@ var swiper = new Swiper('.swiper2', {
 		<li><a href="#fanart">ファンアート</a></li>
 		<li><a href="#message">メッセージ</a></li>
 	</ul>
-	<ul class="nav">
+	<ul class="nav col2">
 		<li><a href="./archive.html"><span>おすすめアーカイブ</span></a></li>
 		<li><a href="./database.html"><span>全配信データベース</span></a></li>
 		<li><a href="https://forms.gle/b6mwVi5TmqdXm2xg7" target="_blank">お問い合わせ</a></li>
-		<li><a href="https://utako.vercel.app/" target="_blank"><span>スイカゲーム</span></a></li>
+		<li><a href="https://utako.vercel.app/" target="_blank"><span>詩子のスイカゲーム</span></a></li>
 	</ul>
 	<p class="caution">当サイトはANYCOLOR株式会社様及び、にじさんじプロジェクトとは一切関係ございません。</p>
 	<p class="copy">&copy;2024 うたっこ一同</p>
@@ -2175,23 +2204,6 @@ var swiper = new Swiper('.swiper2', {
 	</div>
 	<div class="loading-dot"></div>
 </div>
-
-<script>
-$('.openModal').on("click", function() {
-	$('#modalArea').fadeIn(150);
-	$('#js-art').attr("src",$(this).find("img").attr("src"));
-});
-$('#closeModal , #modalBg').on("click", function() {
-	$('#modalArea').fadeOut(150);
-});
-$(".gallery").modaal({
-	type: 'image',
-	overlay_close:true, //モーダル背景クリック時に閉じるか
-});
-$('.modaal-btn').modaal({
-	overlay_close:true, //モーダル背景クリック時に閉じるか
-});
-</script>
 
 </div>
 </body>

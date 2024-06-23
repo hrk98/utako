@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 全てのfetchリクエストが完了するのを待つ
     Promise.all(fetchPromises)
         .then(results => {
-            console.log(results); // コンソールに表示
+            //console.log(results); // コンソールに表示
 
             // JSONデータをマップに格納
             results.forEach(({ file, data }) => {
