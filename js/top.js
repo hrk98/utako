@@ -19,7 +19,7 @@ $(window).on('load',function() {
     var scn = $(window).scrollTop();
 
     if(scn >= pos5){
-    }else if(scn < pos1 - windowHeight){
+    }else if(scn <= pos1){
     }else if(scn >= pos4 - windowHeight - 1000){
         $("#bgfix").addClass("v4");
     }else if(scn >= pos3 - windowHeight - 1000){
@@ -53,8 +53,9 @@ $(window).scroll(function (){
     } else if(Math.ceil($(this).scrollTop()) >= pos1 - windowHeight){
         $("#bgfix").addClass("v1");
         $("#bgfix").removeClass("v2");
-    }else {
-        $("#bgfix").removeClass("v1");
+    }
+    if(Math.ceil($(this).scrollTop()) <= pos1){
+            $("#bgfix").removeClass("v1");
     }
 /*
     if (Math.ceil($(this).scrollTop()) >= pos1 - windowHeight) {
