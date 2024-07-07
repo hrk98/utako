@@ -123,6 +123,9 @@
 .c-aliCenter { align-items: center !important; }
 .c-aliStart { align-items: flex-start !important; }
 .c-aliStretch { align-items: stretch !important; }
+.c-alisCenter { align-self: center !important; }
+.c-alisStart { align-self: flex-start !important; }
+.c-alisEnd { align-self: flex-end !important; }
 
 /* margin */
 .c-m0 { margin: 0 !important; }
