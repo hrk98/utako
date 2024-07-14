@@ -5,7 +5,7 @@ $(window).on('load',function() {
     });
     $("#splash_logo").delay(1200).fadeOut('slow');
 
-    var debug = true;
+    var debug = false;
     if(debug){
         var result = prompt("パスワードを入力してください");
         if(result == '801'){

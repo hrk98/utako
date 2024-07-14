@@ -46,7 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'W-fmVIcwW-o',
         'Fj4HIrXXwQo',
         'TCNs5e6bk5Y',
-        'JkpIFMVnPoM'
+        'JkpIFMVnPoM',
+        '4HQFXrIJj68',
+        '5gb7kIqCxZ0',
+        'PmPTo_4-gOE',
+        'kyke6O8g-Ck'
     ];
 
     // fetchリクエストを作成
